@@ -1,9 +1,14 @@
 .header {
   width: 100%;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif; }
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1; }
   .header header {
     background-color: #03a9f4; }
-  .header path {
+  .header svg {
     color: #ffffff; }
   .header .search {
     margin-right: 30%;
@@ -45,4 +50,5 @@
       font-family: "Roboto", "Helvetica", "Arial", sans-serif; }
     .header .search input::placeholder {
       color: #ffffff;
-      font-family: "Roboto", "Helvetica", "Arial", sans-serif; }
+      font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+      opacity: 0.8; }

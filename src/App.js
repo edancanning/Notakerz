@@ -1,15 +1,18 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
-import Header from "./components/header/Header";
-import Sidebar from "./components/sidebar/Sidebar";
+import React from "react";
+import Menus from "./containers/menus/Menus";
 import "./App.css";
+import "typeface-roboto";
 
-class App extends Component {
+class App extends React.Component {
+    constructor() {
+        super();
+        this.state = {};
+    }
+
     render() {
         return (
-            <div>
-                <Header />
-                <Sidebar />
+            <div className="app">
+                <Menus />
             </div>
         );
     }

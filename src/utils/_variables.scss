@@ -1,8 +1,15 @@
+//globals
 $primary: #03a9f4;
 $primary-light: #17b7ff;
 $accent: #78909c;
 $font: "Roboto", "Helvetica", "Arial", sans-serif;
 
+// sidebar
+$sidebarWidth: 16rem;
+$headerHeight: 64px;
+$logoHeight: 44px;
+
+// global mixins
 @mixin flexbox() {
     display: -webkit-box;
     display: -moz-box;

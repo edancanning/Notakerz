@@ -3,12 +3,13 @@
 .header {
     width: 100%;
     font-family: $font;
+    @include flex(1);
 
     header {
         background-color: $primary;
     }
 
-    path {
+    svg {
         color: #ffffff;
     }
 
@@ -50,6 +51,7 @@
         input::placeholder {
             color: #ffffff;
             font-family: $font;
+            opacity: 0.8;
         }
     }
 }

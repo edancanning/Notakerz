@@ -1,0 +1,80 @@
+@import "../../utils/variables";
+
+.sidebar {
+    width: $sidebarWidth;
+    height: 100vh;
+    background-color: #ffffff;
+    border-right: 0.1rem solid #e5e5e5;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 3;
+    transition: left 0.3s ease-in-out;
+
+    .logo {
+        height: $headerHeight;
+        border-bottom: 0.1rem solid #e5e5e5;
+        text-align: center;
+        img {
+            position: relative;
+            top: 2px;
+            height: $logoHeight;
+            margin: ($headerHeight - $logoHeight) / 2 0;
+        }
+    }
+
+    .profile {
+        width: 100%;
+        height: 10rem;
+        border-bottom: 0.1rem solid #e5e5e5;
+        padding-bottom: 1.5rem;
+
+        .shift {
+            margin-left: 16px;
+        }
+
+        .profile-img {
+            width: 5.5rem;
+            height: 5.5rem;
+            border-radius: 100%;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 100%;
+            }
+        }
+
+        .handle {
+            font-size: 1.1rem;
+        }
+
+        .email {
+            line-height: 0.9;
+        }
+
+        .sign-out {
+            cursor: pointer;
+            margin: 1rem 0;
+            color: $primary;
+        }
+    }
+
+    .nav {
+        .indent {
+            padding-left: 1rem;
+        }
+
+        svg {
+            opacity: 0.8;
+        }
+    }
+}
+
+@media (min-width: 960px) {
+    .sidebar {
+        position: static;
+    }
+}
