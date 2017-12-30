@@ -9,7 +9,7 @@ class Menus extends React.Component {
         this.state = {
             auth: true,
             anchorEl: null,
-            open: true,
+            myCoursesOpen: false,
             sidebarOpen: false
         };
         this.SIDE_BAR_WIDTH = "16rem";
@@ -19,6 +19,10 @@ class Menus extends React.Component {
         this.setState({
             sidebarOpen: !this.state.sidebarOpen
         });
+    };
+
+    toggleMyCourses = () => {
+        this.setState({ myCoursesOpen: !this.state.myCoursesOpen });
     };
 
     // example boilerplate
@@ -35,10 +39,6 @@ class Menus extends React.Component {
         this.setState({ anchorEl: null });
     };
 
-    handleClick = () => {
-        this.setState({ open: !this.state.open });
-    };
-
     render() {
         return (
             <div className="menus">
@@ -49,10 +49,11 @@ class Menus extends React.Component {
                     onClick={this.toggleSidebar}
                 />
                 <Sidebar
-                    handleClick={this.handleClick}
+                    toggleMyCourses={this.toggleMyCourses}
                     sideBarLeft={
                         this.state.sidebarOpen ? "0" : "-" + this.SIDE_BAR_WIDTH
                     }
+                    myCoursesOpen={this.state.myCoursesOpen}
                 />
                 <Header
                     toggleSidebar={this.toggleSidebar}

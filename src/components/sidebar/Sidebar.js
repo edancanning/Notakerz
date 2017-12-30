@@ -1,8 +1,6 @@
 import React from "react";
 import Paper from "material-ui/Paper";
 import Typography from "material-ui/Typography";
-import Button from "material-ui/Button";
-import ListSubheader from "material-ui/List/ListSubheader";
 import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List";
 import Collapse from "material-ui/transitions/Collapse";
 import {
@@ -10,8 +8,7 @@ import {
     ChevronUp,
     ChevronDown,
     BookOpenPageVariant,
-    Star,
-    StarOutline
+    Star
 } from "mdi-material-ui";
 import logo from "../../img/logo.png";
 import gabbie from "../../img/gabbie.png";
@@ -52,16 +49,16 @@ var Sidebar = props => (
                     </ListItemIcon>
                     <ListItemText inset primary="Courses" />
                 </ListItem>
-                <ListItem button onClick={props.handleClick}>
+                <ListItem button onClick={props.toggleMyCourses}>
                     <ListItemIcon>
                         <Star />
                     </ListItemIcon>
                     <ListItemText inset primary="My Courses" />
-                    {props.open ? <ChevronUp /> : <ChevronDown />}
+                    {props.myCoursesOpen ? <ChevronUp /> : <ChevronDown />}
                 </ListItem>
                 <Collapse
                     component="li"
-                    in={props.open}
+                    in={props.myCoursesOpen}
                     timeout="auto"
                     unmountOnExit
                 >
