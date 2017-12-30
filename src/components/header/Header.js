@@ -22,15 +22,17 @@ var Header = props => {
                             xsDown
                             aria-label="Menu"
                         >
-                            <MenuIcon />
+                            <MenuIcon className="menu-icon" />
                         </IconButton>
                     </Hidden>
-                    <div className="search">
-                        <div className="magnify">
-                            <Magnify />
-                        </div>
-                        <div className="search-container">
-                            <input type="text" placeholder="Search" />
+                    <div className="search-container">
+                        <div className="search">
+                            <div className="magnify">
+                                <Magnify />
+                            </div>
+                            <div className="search-box">
+                                <input type="text" placeholder="Search" />
+                            </div>
                         </div>
                     </div>
                     {auth && (

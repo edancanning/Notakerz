@@ -13,45 +13,58 @@
         color: #ffffff;
     }
 
-    .search {
-        margin-right: 30%;
+    .menu-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .search-container {
         @include flex(1);
-        @include flexbox();
-        background-color: $primary-light;
-        padding: 0.5rem;
 
-        .magnify {
-            vertical-align: middle;
-            display: inline-block;
-            width: 1.3rem;
+        .search {
+            max-width: 40rem;
+            margin: 0 1rem;
+            @include flexbox();
+            background-color: $primary-light;
+            padding: 0.5rem;
 
-            svg {
-                width: 100%;
+            .magnify {
+                vertical-align: middle;
+                display: inline-block;
+                width: 1.3rem;
+                margin-left: 0.3rem;
+                margin-right: 0.1rem;
+                position: relative;
+                top: 0.1rem;
+
+                svg {
+                    width: 100%;
+                }
             }
-        }
 
-        .search-container {
-            vertical-align: middle;
-            display: inline-block;
-            @include flex(1);
-            margin-left: 0.5rem;
-        }
+            .search-box {
+                vertical-align: middle;
+                display: inline-block;
+                @include flex(1);
+                margin-left: 0.5rem;
+            }
 
-        input {
-            vertical-align: middle;
-            background: none;
-            border: none;
-            width: 100%;
-            height: 100%;
-            color: #ffffff;
-            font-size: 1rem;
-            font-family: $font;
-        }
+            input {
+                vertical-align: middle;
+                background: none;
+                border: none;
+                width: 100%;
+                height: 100%;
+                color: #ffffff;
+                font-size: 1rem;
+                font-family: $font;
+            }
 
-        input::placeholder {
-            color: #ffffff;
-            font-family: $font;
-            opacity: 0.8;
+            input::placeholder {
+                color: #ffffff;
+                font-family: $font;
+                opacity: 0.8;
+            }
         }
     }
 }

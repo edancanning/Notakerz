@@ -19,7 +19,7 @@
     transition: all 0.3s ease-in-out; }
   .menus .blacken.hide {
     opacity: 0;
-    display: none; }
+    visibility: hidden; }
 
 @media (min-width: 960px) {
   .blacken {
