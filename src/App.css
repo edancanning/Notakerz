@@ -1,0 +1,10 @@
+.app-container .view-offset {
+  margin: 2rem 3rem; }
+
+@media (min-width: 960px) {
+  .app-container .view-offset {
+    position: absolute;
+    top: 64px;
+    bottom: 0;
+    right: 0;
+    left: 16rem; } }

@@ -1,6 +1,6 @@
 @import "../../utils/variables";
 
-.sidebar {
+.sidebar-component {
     width: $sidebarWidth;
     height: 100vh;
     background-color: #ffffff;
@@ -71,10 +71,9 @@
             opacity: 0.8;
         }
     }
-}
-
-@media (min-width: 960px) {
-    .sidebar {
-        position: static;
+    @media (min-width: 960px) {
+        & {
+            position: static;
+        }
     }
 }

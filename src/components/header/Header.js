@@ -12,7 +12,7 @@ var Header = props => {
     const open = Boolean(props.anchorEl);
 
     return (
-        <div className="header">
+        <div className="header-component">
             <AppBar position="static">
                 <Toolbar>
                     <Hidden mdUp>

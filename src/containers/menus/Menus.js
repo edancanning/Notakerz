@@ -41,7 +41,7 @@ class Menus extends React.Component {
 
     render() {
         return (
-            <div className="menus">
+            <div className="menus-container">
                 <div
                     className={
                         this.state.sidebarOpen ? "blacken" : "blacken hide"

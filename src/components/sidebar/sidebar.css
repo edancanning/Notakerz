@@ -1,4 +1,4 @@
-.sidebar {
+.sidebar-component {
   width: 16rem;
   height: 100vh;
   background-color: #ffffff;
@@ -8,45 +8,44 @@
   bottom: 0;
   z-index: 3;
   transition: left 0.3s ease-in-out; }
-  .sidebar .logo {
+  .sidebar-component .logo {
     height: 64px;
     border-bottom: 0.1rem solid #e5e5e5;
     text-align: center; }
-    .sidebar .logo img {
+    .sidebar-component .logo img {
       position: relative;
       top: 2px;
       height: 44px;
       margin: 10px 0; }
-  .sidebar .profile {
+  .sidebar-component .profile {
     width: 100%;
     height: 10rem;
     border-bottom: 0.1rem solid #e5e5e5;
     padding-bottom: 1.5rem; }
-    .sidebar .profile .shift {
+    .sidebar-component .profile .shift {
       margin-left: 16px; }
-    .sidebar .profile .profile-img {
+    .sidebar-component .profile .profile-img {
       width: 5.5rem;
       height: 5.5rem;
       border-radius: 100%;
       margin-top: 2rem;
       margin-bottom: 0.5rem; }
-      .sidebar .profile .profile-img img {
+      .sidebar-component .profile .profile-img img {
         width: 100%;
         height: 100%;
         border-radius: 100%; }
-    .sidebar .profile .handle {
+    .sidebar-component .profile .handle {
       font-size: 1.1rem; }
-    .sidebar .profile .email {
+    .sidebar-component .profile .email {
       line-height: 0.9; }
-    .sidebar .profile .sign-out {
+    .sidebar-component .profile .sign-out {
       cursor: pointer;
       margin: 1rem 0;
       color: #03a9f4; }
-  .sidebar .nav .indent {
+  .sidebar-component .nav .indent {
     padding-left: 1rem; }
-  .sidebar .nav svg {
+  .sidebar-component .nav svg {
     opacity: 0.8; }
-
-@media (min-width: 960px) {
-  .sidebar {
-    position: static; } }
+  @media (min-width: 960px) {
+    .sidebar-component {
+      position: static; } }

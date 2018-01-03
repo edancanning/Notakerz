@@ -9,8 +9,34 @@ $sidebarWidth: 16rem;
 $headerHeight: 64px;
 $logoHeight: 44px;
 
+// viewoffset
+$viewOffsetMarginVertical: 2rem;
+$viewOffsetMarginHorizontal: 3rem;
+
+// typography
+@mixin typography {
+    font-family: $font;
+}
+
+@mixin header {
+    @include typography;
+    color: #535353;
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+@mixin h1 {
+    @include header;
+    font-size: 2rem;
+}
+
+@mixin h2 {
+    @include header;
+    font-size: 1.5rem;
+}
+
 // global mixins
-@mixin flexbox() {
+@mixin flexbox {
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;

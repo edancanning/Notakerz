@@ -15,7 +15,7 @@ import gabbie from "../../img/gabbie.png";
 import "./sidebar.css";
 
 var Sidebar = props => (
-    <div className="sidebar" style={{ left: props.sideBarLeft }}>
+    <div className="sidebar-component" style={{ left: props.sideBarLeft }}>
         <div className="logo">
             <img src={logo} alt="Notakerz logo" />
         </div>

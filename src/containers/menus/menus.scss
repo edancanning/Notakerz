@@ -1,7 +1,7 @@
 @import "../../utils/variables";
 
-.menus {
-    @include flexbox();
+.menus-container {
+    @include flexbox;
 
     .blacken {
         width: 100%;

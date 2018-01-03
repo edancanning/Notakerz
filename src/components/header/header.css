@@ -1,4 +1,4 @@
-.header {
+.header-component {
   width: 100%;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   -webkit-box-flex: 1;
@@ -6,20 +6,20 @@
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1; }
-  .header header {
+  .header-component header {
     background-color: #03a9f4; }
-  .header svg {
+  .header-component svg {
     color: #ffffff; }
-  .header .menu-icon {
+  .header-component .menu-icon {
     width: 28px;
     height: 28px; }
-  .header .search-container {
+  .header-component .search-container {
     -webkit-box-flex: 1;
     -moz-box-flex: 1;
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1; }
-    .header .search-container .search {
+    .header-component .search-container .search {
       max-width: 40rem;
       margin: 0 1rem;
       display: -webkit-box;
@@ -29,7 +29,7 @@
       display: flex;
       background-color: #17b7ff;
       padding: 0.5rem; }
-      .header .search-container .search .magnify {
+      .header-component .search-container .search .magnify {
         vertical-align: middle;
         display: inline-block;
         width: 1.3rem;
@@ -37,9 +37,9 @@
         margin-right: 0.1rem;
         position: relative;
         top: 0.1rem; }
-        .header .search-container .search .magnify svg {
+        .header-component .search-container .search .magnify svg {
           width: 100%; }
-      .header .search-container .search .search-box {
+      .header-component .search-container .search .search-box {
         vertical-align: middle;
         display: inline-block;
         -webkit-box-flex: 1;
@@ -48,7 +48,7 @@
         -ms-flex: 1;
         flex: 1;
         margin-left: 0.5rem; }
-      .header .search-container .search input {
+      .header-component .search-container .search input {
         vertical-align: middle;
         background: none;
         border: none;
@@ -57,7 +57,7 @@
         color: #ffffff;
         font-size: 1rem;
         font-family: "Roboto", "Helvetica", "Arial", sans-serif; }
-      .header .search-container .search input::placeholder {
+      .header-component .search-container .search input::placeholder {
         color: #ffffff;
         font-family: "Roboto", "Helvetica", "Arial", sans-serif;
         opacity: 0.8; }

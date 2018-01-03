@@ -1,6 +1,6 @@
 @import "../../utils/variables";
 
-.header {
+.header-component {
     width: 100%;
     font-family: $font;
     @include flex(1);
@@ -24,7 +24,7 @@
         .search {
             max-width: 40rem;
             margin: 0 1rem;
-            @include flexbox();
+            @include flexbox;
             background-color: $primary-light;
             padding: 0.5rem;
 

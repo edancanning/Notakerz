@@ -1,4 +1,19 @@
 @import "./utils/variables";
 
-.app {
+.app-container {
+    .view-offset {
+        margin: $viewOffsetMarginVertical $viewOffsetMarginHorizontal;
+    }
+
+    @media (min-width: 960px) {
+        & {
+            .view-offset {
+                position: absolute;
+                top: $headerHeight;
+                bottom: 0;
+                right: 0;
+                left: $sidebarWidth;
+            }
+        }
+    }
 }
