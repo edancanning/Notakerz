@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const Note = require("../database/models/note.js");
+const Note = require("../../database/models/note.js");
 
 router.get("/", (req, res) => {
     Note.find({})
@@ -15,13 +15,21 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-    let { author, description, price, files, title } = req.body;
+    var { notaker, description, price, files, title, course } = req.body;
+
+    if (files === undefined || files.length === 0) {
+        return res
+            .status(400)
+            .send("Files attribute on this note is empty or undefined");
+    }
+
     var newNote = new Note({
-        author,
+        notaker,
         description,
         price,
         files,
         title,
+        course,
         createdAt: new Date().getTime()
     });
 

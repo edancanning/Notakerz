@@ -1,13 +1,25 @@
 const mongoose = require("mongoose");
 
 var NoteSchema = new mongoose.Schema({
-    author: {
+    notaker: {
         type: String,
         required: true
     },
     createdAt: {
         type: Number,
         required: true
+    },
+    course: {
+        type: Object,
+        required: true,
+        name: {
+            type: String,
+            required: true
+        },
+        id: {
+            type: String,
+            requird: true
+        }
     },
     title: {
         type: String,
@@ -25,23 +37,36 @@ var NoteSchema = new mongoose.Schema({
         required: true,
         min: 0
     },
-    files: [
-        {
-            filetype: {
-                type: String,
-                required: true
-            },
-            url: {
-                type: String,
-                required: true
-            },
-            thumbnailUrl: {
-                type: String,
-                required: true
+    files: {
+        type: [
+            {
+                _id: false,
+                fileType: {
+                    type: String,
+                    required: true
+                },
+                url: {
+                    type: String,
+                    required: true
+                },
+                thumbnailUrl: {
+                    type: String,
+                    required: true
+                },
+                name: {
+                    type: String,
+                    required: true
+                }
             }
-        }
-    ]
+        ],
+        required: true,
+        validate: [arrayLimit, "{PATH} exceeds the limit of 5"]
+    }
 });
+
+function arrayLimit(val) {
+    return val.length <= 5;
+}
 
 var Note = mongoose.model("Note", NoteSchema);
 

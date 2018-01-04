@@ -3,12 +3,15 @@ const express = require("express");
 const bodyparser = require("body-parser");
 
 const mongoose = require("./database/mongoose");
-const notesRouter = require("./routes/notes");
+const notesRouter = require("./routes/notes/notes");
+const coursesRouter = require("./routes/courses/courses");
 
 var app = express();
 
 app.use(bodyparser.json());
+
 app.use("/notes", notesRouter);
+app.use("/courses", coursesRouter);
 
 app.get("/", (req, res) => {
     res.send("Yo!");
