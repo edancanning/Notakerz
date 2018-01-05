@@ -8,4 +8,17 @@
     h2 {
         @include h2;
     }
+
+    .grid-container {
+        margin-top: 1rem;
+
+        .loader-container {
+            text-align: center;
+            margin-top: 20vh;
+
+            .loader {
+                color: $primary;
+            }
+        }
+    }
 }

@@ -1,53 +1,37 @@
 import React from "react";
-import Card, {
-    CardHeader,
-    CardMedia,
-    CardContent,
-    CardActions
-} from "material-ui/Card";
-import Collapse from "material-ui/transitions/Collapse";
-import Avatar from "material-ui/Avatar";
-import IconButton from "material-ui/IconButton";
-import Typography from "material-ui/Typography";
-import red from "material-ui/colors/red";
-import { Coffee } from "mdi-material-ui";
+import { IconButton, Paper, Avatar } from "material-ui/";
+import { Coffee, Cart } from "mdi-material-ui";
 
+import { timeSince } from "../../utils/utils";
 import "./note.css";
 
 var Note = props => {
     return (
         <div className="note-component">
-            <Card>
-                <CardHeader
-                    avatar={<Avatar aria-label="Recipe">R</Avatar>}
-                    action={
-                        <IconButton>
-                            <Coffee />
-                        </IconButton>
-                    }
-                    title="Shrimp and Chorizo Paella"
-                    subheader="September 14, 2016"
+            <Paper>
+                <div className="header">
+                    <Avatar>{props.notaker.charAt(0).toUpperCase()}</Avatar>
+                    <div className="notaker-container">
+                        <p className="notaker">{props.notaker}</p>
+                        <p className="created-at">
+                            {timeSince(props.createdAt)}
+                        </p>
+                    </div>
+                    <div className="price-container">
+                        <p className="price">{`$${props.price}`}</p>
+                    </div>
+                </div>
+                <div
+                    className="thumbnail"
+                    style={{
+                        backgroundImage: `url(${props.files[0].thumbnailUrl})`
+                    }}
                 />
-                <CardMedia
-                    image="/static/images/cards/paella.jpg"
-                    title="Contemplative Reptile"
-                />
-                <CardContent>
-                    <Typography component="p">
-                        This impressive paella is a perfect party dish and a fun
-                        meal to cook together with your guests. Add 1 cup of
-                        frozen peas along with the mussels, if you like.
-                    </Typography>
-                </CardContent>
-                <CardActions disableActionSpacing>
-                    <IconButton aria-label="Add to favorites">
-                        <Coffee />
-                    </IconButton>
-                    <IconButton aria-label="Share">
-                        <Coffee />
-                    </IconButton>
-                </CardActions>
-            </Card>
+                <div className="footer">
+                    <p className="course">{props.course.name}</p>
+                    <p className="title">{props.title}</p>
+                </div>
+            </Paper>
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import Grid from "material-ui/Grid";
+import { Grid, CircularProgress } from "material-ui/";
 import axios from "axios";
 import Note from "../../components/note/Note";
 import "./notes.css";
@@ -15,6 +15,7 @@ class Notes extends React.Component {
         axios
             .get("/notes")
             .then(res => {
+                console.log(res.data.notes);
                 this.setState({ notes: res.data.notes });
             })
             .catch(e => {
@@ -22,30 +23,30 @@ class Notes extends React.Component {
             });
     }
 
+    renderNotes = () => {
+        if (this.state.notes.length > 0) {
+            return this.state.notes.map(element => (
+                <Grid key={element._id} item xs={12} sm={6} lg={4}>
+                    <Note {...element} />
+                </Grid>
+            ));
+        } else {
+            return (
+                <Grid item className="loader-container" xs={12}>
+                    <CircularProgress className="loader" size={75} />
+                </Grid>
+            );
+        }
+    };
+
     render() {
         return (
             <div className="notes-container">
                 <h1>University of Florida</h1>
                 <h2>Latest notes</h2>
-                <Grid container spacing={24}>
-                    <Grid item xs={12} sm={6} lg={4}>
-                        <Note />
-                    </Grid>
-                    <Grid item xs={12} sm={6} lg={4}>
-                        <Note />
-                    </Grid>
-                    <Grid item xs={12} sm={6} lg={4}>
-                        <Note />
-                    </Grid>
-                    <Grid item xs={12} sm={6} lg={4}>
-                        <Note />
-                    </Grid>
-                    <Grid item xs={12} sm={6} lg={4}>
-                        <Note />
-                    </Grid>
-                    <Grid item xs={12} sm={6} lg={4}>
-                        <Note />
-                    </Grid>
+
+                <Grid container className="grid-container" spacing={24}>
+                    {this.renderNotes()}
                 </Grid>
             </div>
         );

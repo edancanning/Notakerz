@@ -11,3 +11,11 @@
   font-weight: normal;
   line-height: 1.2;
   font-size: 1.5rem; }
+
+.notes-container .grid-container {
+  margin-top: 1rem; }
+  .notes-container .grid-container .loader-container {
+    text-align: center;
+    margin-top: 20vh; }
+    .notes-container .grid-container .loader-container .loader {
+      color: #03a9f4; }
