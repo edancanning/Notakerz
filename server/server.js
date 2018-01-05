@@ -5,6 +5,7 @@ const bodyparser = require("body-parser");
 const mongoose = require("./database/mongoose");
 const notesRouter = require("./routes/notes/notes");
 const coursesRouter = require("./routes/courses/courses");
+const usersRouter = require("./routes/users/users");
 
 var app = express();
 
@@ -12,6 +13,7 @@ app.use(bodyparser.json());
 
 app.use("/notes", notesRouter);
 app.use("/courses", coursesRouter);
+app.use("/users", usersRouter);
 
 app.get("/", (req, res) => {
     res.send("Yo!");

@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 
 var NoteSchema = new mongoose.Schema({
     notaker: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
         required: true
     },
     createdAt: {
@@ -10,16 +11,9 @@ var NoteSchema = new mongoose.Schema({
         required: true
     },
     course: {
-        type: Object,
-        required: true,
-        name: {
-            type: String,
-            required: true
-        },
-        id: {
-            type: String,
-            requird: true
-        }
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Course",
+        required: true
     },
     title: {
         type: String,

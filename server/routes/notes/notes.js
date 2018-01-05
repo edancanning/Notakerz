@@ -4,6 +4,7 @@ const Note = require("../../database/models/note.js");
 
 router.get("/", (req, res) => {
     Note.find({})
+        .populate(["course", "notaker"])
         .sort({ createdAt: 1 })
         .limit(20)
         .then(notes => {
