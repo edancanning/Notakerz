@@ -1,70 +1,72 @@
 @import "../../utils/variables";
 
 .header-component {
-    width: 100%;
-    font-family: $font;
+  width: 100%;
+  font-family: $font;
+  @include flex(1);
+  z-index: 2;
+  height: 100%;
+
+  header {
+    background-color: $primary;
+  }
+
+  svg {
+    color: #ffffff;
+  }
+
+  .menu-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .search-container {
     @include flex(1);
 
-    header {
-        background-color: $primary;
-    }
+    .search {
+      max-width: 40rem;
+      margin: 0 1rem;
+      @include flexbox;
+      background-color: $primary-light;
+      padding: 0.5rem;
 
-    svg {
-        color: #ffffff;
-    }
+      .magnify {
+        vertical-align: middle;
+        display: inline-block;
+        width: 1.3rem;
+        margin-left: 0.3rem;
+        margin-right: 0.1rem;
+        position: relative;
+        top: 0.1rem;
 
-    .menu-icon {
-        width: 28px;
-        height: 28px;
-    }
-
-    .search-container {
-        @include flex(1);
-
-        .search {
-            max-width: 40rem;
-            margin: 0 1rem;
-            @include flexbox;
-            background-color: $primary-light;
-            padding: 0.5rem;
-
-            .magnify {
-                vertical-align: middle;
-                display: inline-block;
-                width: 1.3rem;
-                margin-left: 0.3rem;
-                margin-right: 0.1rem;
-                position: relative;
-                top: 0.1rem;
-
-                svg {
-                    width: 100%;
-                }
-            }
-
-            .search-box {
-                vertical-align: middle;
-                display: inline-block;
-                @include flex(1);
-                margin-left: 0.5rem;
-            }
-
-            input {
-                vertical-align: middle;
-                background: none;
-                border: none;
-                width: 100%;
-                height: 100%;
-                color: #ffffff;
-                font-size: 1rem;
-                font-family: $font;
-            }
-
-            input::placeholder {
-                color: #ffffff;
-                font-family: $font;
-                opacity: 0.8;
-            }
+        svg {
+          width: 100%;
         }
+      }
+
+      .search-box {
+        vertical-align: middle;
+        display: inline-block;
+        @include flex(1);
+        margin-left: 0.5rem;
+      }
+
+      input {
+        vertical-align: middle;
+        background: none;
+        border: none;
+        width: 100%;
+        height: 100%;
+        color: #ffffff;
+        font-size: 1rem;
+        font-family: $font;
+      }
+
+      input::placeholder {
+        color: #ffffff;
+        font-family: $font;
+        opacity: 0.8;
+      }
     }
+  }
 }

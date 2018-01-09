@@ -18,7 +18,7 @@
         "typeface-roboto": "0.0.45"
     },
     "scripts": {
-        "server": "nodemon server/server.js",
+        "server": "nodemon server/server.mock.js",
         "server-test":
             "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha server/**/*.test.js",
         "server-test-w": "nodemon --exec \"npm run server-test\"",

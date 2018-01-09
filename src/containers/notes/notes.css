@@ -1,16 +1,20 @@
-.notes-container h1 {
+.notes-container .header h1 {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   color: #535353;
   font-weight: normal;
   line-height: 1.2;
   font-size: 2rem; }
 
-.notes-container h2 {
+.notes-container .header h2 {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   color: #535353;
   font-weight: normal;
   line-height: 1.2;
   font-size: 1.5rem; }
+
+.notes-container .header .add-note {
+  background-color: #78909c;
+  color: #ffffff; }
 
 .notes-container .grid-container {
   margin-top: 1rem; }

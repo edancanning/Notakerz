@@ -1,24 +1,29 @@
 @import "../../utils/variables";
 
 .notes-container {
+  .header {
     h1 {
-        @include h1;
+      @include h1;
     }
 
     h2 {
-        @include h2;
+      @include h2;
     }
-
-    .grid-container {
-        margin-top: 1rem;
-
-        .loader-container {
-            text-align: center;
-            margin-top: 20vh;
-
-            .loader {
-                color: $primary;
-            }
-        }
+    .add-note {
+      background-color: $accent;
+      color: #ffffff;
     }
+  }
+  .grid-container {
+    margin-top: 1rem;
+
+    .loader-container {
+      text-align: center;
+      margin-top: 20vh;
+
+      .loader {
+        color: $primary;
+      }
+    }
+  }
 }

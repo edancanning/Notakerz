@@ -5,7 +5,9 @@
   -moz-box-flex: 1;
   -webkit-flex: 1;
   -ms-flex: 1;
-  flex: 1; }
+  flex: 1;
+  z-index: 2;
+  height: 100%; }
   .header-component header {
     background-color: #03a9f4; }
   .header-component svg {

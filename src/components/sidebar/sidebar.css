@@ -2,7 +2,6 @@
   width: 16rem;
   height: 100vh;
   background-color: #ffffff;
-  border-right: 0.1rem solid #e5e5e5;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -45,7 +44,7 @@
   .sidebar-component .nav .indent {
     padding-left: 1rem; }
   .sidebar-component .nav svg {
-    opacity: 0.8; }
+    color: #8c8b8b; }
   @media (min-width: 960px) {
     .sidebar-component {
       position: static; } }

@@ -1,20 +1,6 @@
 const mongoose = require("mongoose");
 
 var NoteSchema = new mongoose.Schema({
-    notaker: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true
-    },
-    createdAt: {
-        type: Number,
-        required: true
-    },
-    course: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Course",
-        required: true
-    },
     title: {
         type: String,
         required: true,
@@ -26,23 +12,34 @@ var NoteSchema = new mongoose.Schema({
         minlength: 20,
         trim: true
     },
+    createdAt: {
+        type: Number,
+        required: true
+    },
     price: {
         type: Number,
         required: true,
         min: 0
     },
+    course: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Course",
+        required: true
+    },
+    notaker: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Notaker",
+        required: true
+    },
+    university: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "University",
+        required: true
+    }
     files: {
         type: [
             {
                 _id: false,
-                fileType: {
-                    type: String,
-                    required: true
-                },
-                url: {
-                    type: String,
-                    required: true
-                },
                 thumbnailUrl: {
                     type: String,
                     required: true
