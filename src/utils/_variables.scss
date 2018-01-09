@@ -2,8 +2,10 @@
 $primary: #03a9f4;
 $primary-light: #17b7ff;
 $accent: #78909c;
+$accent-light: #abbbc5;
 $font: "Roboto", "Helvetica", "Arial", sans-serif;
 $icon-color: #8c8b8b;
+$font-color: #3d3d3d;
 
 // sidebar
 $sidebarWidth: 16rem;
@@ -40,7 +42,7 @@ $viewOffsetMarginHorizontal: 3rem;
   @include typography;
   line-height: 1.3;
   font-size: 1rem;
-  color: #3d3d3d;
+  color: $font-color;
 }
 
 @mixin p-light {

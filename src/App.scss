@@ -4,14 +4,14 @@
   .view-offset {
     overflow-y: scroll;
     padding: $viewOffsetMarginVertical $viewOffsetMarginHorizontal;
+    position: absolute;
+    top: $headerHeight;
+    bottom: 0;
   }
 
   @media (min-width: 960px) {
     & {
       .view-offset {
-        position: absolute;
-        top: $headerHeight;
-        bottom: 0;
         right: 0;
         left: $sidebarWidth;
       }

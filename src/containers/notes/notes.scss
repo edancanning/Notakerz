@@ -2,16 +2,30 @@
 
 .notes-container {
   .header {
-    h1 {
-      @include h1;
-    }
+    @include flexbox-vertical-center;
+    .title {
+      @include flex(1);
+      h1 {
+        @include h1;
+      }
 
-    h2 {
-      @include h2;
+      h2 {
+        @include h2;
+      }
     }
     .add-note {
       background-color: $accent;
       color: #ffffff;
+      right: 3rem;
+      bottom: 2rem;
+      z-index: 3;
+      width: 4rem;
+      position: fixed;
+      height: 4rem;
+      svg {
+        width: 1.75rem;
+        height: 1.75rem;
+      }
     }
   }
   .grid-container {
@@ -23,6 +37,16 @@
 
       .loader {
         color: $primary;
+      }
+    }
+  }
+
+  @media (min-width: 960px) {
+    .header {
+      .add-note {
+        position: relative;
+        right: auto;
+        bottom: auto;
       }
     }
   }

@@ -44,8 +44,10 @@ class Notes extends React.Component {
     return (
       <div className="notes-container">
         <div className="header">
-          <h1>University of Florida</h1>
-          <h2>Latest notes</h2>
+          <div className="title">
+            <h1>University of Florida</h1>
+            <h2>Latest notes</h2>
+          </div>
           <Button className="add-note" fab aria-label="create a note">
             <LeadPencil />
           </Button>

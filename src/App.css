@@ -1,11 +1,11 @@
 .app-container .view-offset {
   overflow-y: scroll;
-  padding: 2rem 3rem; }
+  padding: 2rem 3rem;
+  position: absolute;
+  top: 64px;
+  bottom: 0; }
 
 @media (min-width: 960px) {
   .app-container .view-offset {
-    position: absolute;
-    top: 64px;
-    bottom: 0;
     right: 0;
     left: 16rem; } }

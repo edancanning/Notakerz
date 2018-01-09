@@ -12,7 +12,7 @@
       padding: 0.75rem;
       @include flexbox-vertical-center;
       .avatar {
-        background-color: $icon-color;
+        background-color: $accent-light;
       }
       .notaker-container {
         @include flex(1);
