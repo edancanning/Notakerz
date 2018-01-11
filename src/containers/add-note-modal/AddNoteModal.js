@@ -23,6 +23,12 @@ import { Close } from "mdi-material-ui";
 import AddNoteStepper from "../../components/add-note-stepper/AddNoteStepper";
 import { courseToTitle } from "../../utils/utils";
 import "./addNoteModal.css";
+
+const TITLE_MAX_LENGTH = 50;
+const DESCRIPTION_MAX_LENGTH = 250;
+const TITLE_MIN_LENGTH = 10;
+const DESCRIPTION_MIN_LENGTH = 50;
+
 class AddNoteModal extends React.Component {
   constructor(props) {
     super();
@@ -94,6 +100,20 @@ class AddNoteModal extends React.Component {
     }
   };
 
+  handleDescriptionChange = event => {
+    this.setState({
+      description: event.target.value.substr(0, DESCRIPTION_MAX_LENGTH),
+      descriptionError: false
+    });
+  };
+
+  handleTitleChange = event => {
+    this.setState({
+      title: event.target.value.substr(0, TITLE_MAX_LENGTH),
+      titleError: false
+    });
+  };
+
   handleFormNext = () => {
     var verified = true;
 
@@ -107,12 +127,15 @@ class AddNoteModal extends React.Component {
       this.setState({ courseError: true });
     }
 
-    if (this.state.title === "") {
+    if (this.state.title === "" || this.state.title.length < TITLE_MIN_LENGTH) {
       verified = false;
       this.setState({ titleError: true });
     }
 
-    if (this.state.description === "") {
+    if (
+      this.state.description === "" ||
+      this.state.description.length < DESCRIPTION_MIN_LENGTH
+    ) {
       verified = false;
       this.setState({ descriptionError: true });
     }
@@ -210,9 +233,8 @@ class AddNoteModal extends React.Component {
               label="Course Title"
               value={this.state.title}
               margin="normal"
-              helperText="Min 10 characters"
-              maxLength="2"
-              onChange={this.handleInputChange}
+              helperText={`Min ${TITLE_MIN_LENGTH} characters`}
+              onChange={this.handleTitleChange}
             />
             <TextField
               error={this.state.descriptionError}
@@ -221,12 +243,11 @@ class AddNoteModal extends React.Component {
               required
               id="course-description"
               label="Course Description"
-              defaultValue=""
+              value={this.state.description}
               margin="normal"
               multiline
-              maxLength="100"
-              onChange={this.handleInputChange}
-              helperText="Min 30 characters"
+              onChange={this.handleDescriptionChange}
+              helperText={`Min ${DESCRIPTION_MIN_LENGTH} characters`}
             />
             <FormControl
               required
