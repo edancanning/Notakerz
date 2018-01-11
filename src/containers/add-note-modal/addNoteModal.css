@@ -22,6 +22,10 @@
   .add-note-modal-dialog .dialog-content .form .input-field {
     width: 100%;
     margin-top: 0.5rem; }
+  .add-note-modal-dialog .dialog-content .step-buttons {
+    margin-top: 2rem; }
+    .add-note-modal-dialog .dialog-content .step-buttons .next-button {
+      color: #ffffff; }
 
 .add-note-modal-dialog #responsive-dialog-title {
   visibility: hidden; }

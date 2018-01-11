@@ -3,10 +3,18 @@
 .app-container {
   .view-offset {
     overflow-y: scroll;
-    padding: $viewOffsetMarginVertical $viewOffsetMarginHorizontal;
+    padding: $viewOffsetMarginVerticalMobile $viewOffsetMarginHorizontalMobile;
     position: absolute;
     top: $headerHeight;
     bottom: 0;
+  }
+
+  @media (min-width: 400px) {
+    & {
+      .view-offset {
+        padding: $viewOffsetMarginVertical $viewOffsetMarginHorizontal;
+      }
+    }
   }
 
   @media (min-width: 960px) {

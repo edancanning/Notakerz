@@ -3,7 +3,3 @@
   padding: 1rem; }
   .add-note-stepper-component .stepper .step svg text {
     fill: #ffffff; }
-  .add-note-stepper-component .stepper .step .step-buttons {
-    margin-top: 2rem; }
-    .add-note-stepper-component .stepper .step .step-buttons .next-button {
-      color: #ffffff; }
