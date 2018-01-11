@@ -11,11 +11,16 @@ var notaker = {
 
 var course = {
   _id: "5a4d9ee4fbdf334a5ce790fe",
-  courseName: "Calculus 2",
+  name: "Calculus 2",
   semester: "Fall",
-  year: 17,
-  courseCode: "MAC 2312",
+  year: 2017,
+  professor: "Chui",
+  code: "MAC 2312",
   __v: 0
+};
+
+var university = {
+  name: "University of Florida"
 };
 
 var note = {
@@ -84,20 +89,30 @@ function getNote(i) {
 function getCourse(i) {
   var newCourse = Object.assign({}, course);
   newCourse._id = i;
-  newCourse.courseName = `Calculus ${i}`;
+  newCourse.code = `MAC 231${i}`;
   return newCourse;
 }
 
+function getUniversity(i) {
+  var newUniversity = Object.assign({}, university);
+  newUniversity._id = i;
+  return newUniversity;
+}
+
 var notes = [];
+var courses = [];
+var universities = [];
 
 for (let i = 0; i < 10; i++) {
   notes.push(getNote(i));
 }
 
-var courses = [];
-
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 20; i++) {
   courses.push(getCourse(i));
+}
+
+for (let i = 0; i < 1; i++) {
+  universities.push(getUniversity(i));
 }
 
 app.get("/notes", (req, res) => {
@@ -111,6 +126,13 @@ app.get("/courses", (req, res) => {
   console.log("GET /courses");
   setTimeout(() => {
     res.send({ courses });
+  }, 100);
+});
+
+app.get("/universities", (req, res) => {
+  console.log("GET /universities");
+  setTimeout(() => {
+    res.send({ universities });
   }, 100);
 });
 

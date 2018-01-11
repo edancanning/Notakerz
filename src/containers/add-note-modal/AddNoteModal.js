@@ -12,12 +12,15 @@ import {
   Select,
   AppBar,
   Toolbar,
-  IconButton
+  IconButton,
+  TextField,
+  InputAdornment
 } from "material-ui";
 import axios from "axios";
 import { Close } from "mdi-material-ui";
 
 import AddNoteStepper from "../../components/add-note-stepper/AddNoteStepper";
+import { courseToTitle } from "../../utils/utils";
 import "./addNoteModal.css";
 class AddNoteModal extends React.Component {
   constructor(props) {
@@ -26,7 +29,11 @@ class AddNoteModal extends React.Component {
       activeStep: 0,
       university: "University of Florida",
       course: "",
-      courses: []
+      title: "",
+      description: "",
+      price: "",
+      courses: [],
+      universities: []
     };
   }
 
@@ -34,14 +41,25 @@ class AddNoteModal extends React.Component {
     axios
       .get("/courses")
       .then(res => {
-        console.log(res.body);
+        console.log("GET /courses");
+        this.setState({ courses: res.data.courses });
+      })
+      .catch(e => {
+        console.log(e);
+      });
+
+    axios
+      .get("/universities")
+      .then(res => {
+        console.log("GET /universities");
+        this.setState({ universities: res.data.universities });
       })
       .catch(e => {
         console.log(e);
       });
   };
 
-  handleSelectionChange = event => {
+  handleInputChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
@@ -69,36 +87,81 @@ class AddNoteModal extends React.Component {
     if (index === 0) {
       return (
         <form className="form" autoComplete="off">
-          <FormControl className="form-control">
+          <FormControl className="input-field">
             <InputLabel htmlFor="university">University</InputLabel>
             <Select
               value={this.state.university}
-              onChange={this.handleSelectionChange}
+              onChange={this.handleInputChange}
               input={<Input name="university" id="university" />}
             >
-              <MenuItem value="University of Florida">
-                <em>University of Florida</em>
+              <MenuItem value="">
+                <em>None</em>
               </MenuItem>
+              {this.state.universities.map(university => (
+                <MenuItem key={university._id} value={university._id}>
+                  {university.name}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
-          <FormControl className="form-control">
+          <FormControl className="input-field">
             <InputLabel htmlFor="course">Course</InputLabel>
             <Select
               value={this.state.course}
-              onChange={this.handleSelectionChange}
+              onChange={this.handleInputChange}
               input={<Input name="course" id="course" />}
             >
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              {this.state.courses.map((course, index) => {
-                return (
-                  <MenuItem key={course._id} value={10}>
-                    Ten
-                  </MenuItem>
-                );
-              })}
+              {this.state.courses.map((course, index) => (
+                <MenuItem key={course._id} value={course._id}>
+                  {courseToTitle(
+                    course.code,
+                    course.semester,
+                    course.year,
+                    course.professor
+                  )}
+                </MenuItem>
+              ))}
             </Select>
+          </FormControl>
+          <TextField
+            name="title"
+            className="input-field"
+            required
+            id="course-title"
+            label="Course Title"
+            value={this.state.title}
+            margin="normal"
+            helperText="Min 10 characters"
+            maxLength={20}
+            onChange={this.handleInputChange}
+          />
+          <TextField
+            name="description"
+            className="input-field"
+            required
+            id="course-description"
+            label="Course Description"
+            defaultValue=""
+            margin="normal"
+            multiline
+            maxLength={200}
+            onChange={this.handleInputChange}
+            helperText="Min 30 characters"
+          />
+          <FormControl className="input-field">
+            <InputLabel htmlFor="price">Price</InputLabel>
+            <Input
+              id="price"
+              value={this.state.price}
+              onChange={this.handleInputChange}
+              name="price"
+              startAdornment={
+                <InputAdornment position="start">$</InputAdornment>
+              }
+            />
           </FormControl>
         </form>
       );

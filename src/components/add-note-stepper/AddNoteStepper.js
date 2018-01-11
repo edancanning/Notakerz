@@ -30,7 +30,7 @@ var AddNoteStepper = props => (
             <StepLabel>{label}</StepLabel>
             <StepContent>
               {props.getStep(index)}
-              <div className="control-buttons">
+              <div className="step-buttons">
                 <Button
                   disabled={props.activeStep === 0}
                   onClick={props.handleBack}
