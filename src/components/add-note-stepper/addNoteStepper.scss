@@ -1,0 +1,19 @@
+@import "../../utils/variables";
+.add-note-stepper-component {
+  .stepper {
+    padding: 0;
+    padding: 1rem;
+    .step {
+      svg text {
+        fill: #ffffff;
+      }
+
+      .control-buttons {
+        margin-top: 1rem;
+        .next-button {
+          color: #ffffff;
+        }
+      }
+    }
+  }
+}

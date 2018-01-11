@@ -29,12 +29,12 @@
   .notes-container .header .add-note {
     background-color: #78909c;
     color: #ffffff;
-    right: 3rem;
+    right: 2rem;
     bottom: 2rem;
     z-index: 3;
-    width: 4rem;
+    width: 3.75rem;
     position: fixed;
-    height: 4rem; }
+    height: 3.75rem; }
     .notes-container .header .add-note svg {
       width: 1.75rem;
       height: 1.75rem; }

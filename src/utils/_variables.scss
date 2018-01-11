@@ -38,6 +38,11 @@ $viewOffsetMarginHorizontal: 3rem;
   font-size: 1.5rem;
 }
 
+@mixin h3 {
+  @include header;
+  font-size: 1.1rem;
+}
+
 @mixin p {
   @include typography;
   line-height: 1.3;

@@ -81,16 +81,36 @@ function getNote(i) {
   return newNote;
 }
 
+function getCourse(i) {
+  var newCourse = Object.assign({}, course);
+  newCourse._id = i;
+  newCourse.courseName = `Calculus ${i}`;
+  return newCourse;
+}
+
 var notes = [];
 
 for (let i = 0; i < 10; i++) {
   notes.push(getNote(i));
 }
 
+var courses = [];
+
+for (let i = 0; i < 10; i++) {
+  courses.push(getCourse(i));
+}
+
 app.get("/notes", (req, res) => {
   console.log("GET /notes");
   setTimeout(() => {
     res.send({ notes });
+  }, 100);
+});
+
+app.get("/courses", (req, res) => {
+  console.log("GET /courses");
+  setTimeout(() => {
+    res.send({ courses });
   }, 100);
 });
 

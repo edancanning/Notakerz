@@ -1,0 +1,9 @@
+.add-note-stepper-component .stepper {
+  padding: 0;
+  padding: 1rem; }
+  .add-note-stepper-component .stepper .step svg text {
+    fill: #ffffff; }
+  .add-note-stepper-component .stepper .step .control-buttons {
+    margin-top: 1rem; }
+    .add-note-stepper-component .stepper .step .control-buttons .next-button {
+      color: #ffffff; }

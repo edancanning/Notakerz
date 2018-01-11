@@ -2,13 +2,15 @@ import React from "react";
 import { Grid, CircularProgress, Button } from "material-ui/";
 import { LeadPencil } from "mdi-material-ui";
 import axios from "axios";
+import AddNoteModal from "../add-note-modal/AddNoteModal";
 import Note from "../../components/note/Note";
 import "./notes.css";
 class Notes extends React.Component {
   constructor() {
     super();
     this.state = {
-      notes: []
+      notes: [],
+      modalOpen: false
     };
   }
 
@@ -40,6 +42,14 @@ class Notes extends React.Component {
     }
   };
 
+  handleModalOpen = () => {
+    this.setState({ modalOpen: true });
+  };
+
+  handleModalClose = () => {
+    this.setState({ modalOpen: false });
+  };
+
   render() {
     return (
       <div className="notes-container">
@@ -48,14 +58,22 @@ class Notes extends React.Component {
             <h1>University of Florida</h1>
             <h2>Latest notes</h2>
           </div>
-          <Button className="add-note" fab aria-label="create a note">
+          <Button
+            className="add-note"
+            onClick={this.handleModalOpen}
+            fab
+            aria-label="create a note"
+          >
             <LeadPencil />
           </Button>
         </div>
-
         <Grid container className="grid-container" spacing={24}>
           {this.renderNotes()}
         </Grid>
+        <AddNoteModal
+          open={this.state.modalOpen}
+          handleModalClose={this.handleModalClose}
+        />
       </div>
     );
   }
