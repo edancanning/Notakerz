@@ -19,9 +19,28 @@
 
 .add-note-modal-dialog .dialog-content {
   padding: 0; }
-  .add-note-modal-dialog .dialog-content .form .input-field {
+  .add-note-modal-dialog .dialog-content .step-one .form .input-field {
     width: 100%;
     margin-top: 0.5rem; }
+  .add-note-modal-dialog .dialog-content .step-two .upload-button-container {
+    text-align: center;
+    margin-top: 15vh;
+    margin-bottom: 17vh; }
+    .add-note-modal-dialog .dialog-content .step-two .upload-button-container .title {
+      font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+      color: #535353;
+      font-weight: normal;
+      line-height: 1.2;
+      font-size: 1.1rem;
+      margin-bottom: 1rem; }
+    .add-note-modal-dialog .dialog-content .step-two .upload-button-container .loader-container {
+      display: inline-block;
+      position: relative; }
+      .add-note-modal-dialog .dialog-content .step-two .upload-button-container .loader-container .loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); }
   .add-note-modal-dialog .dialog-content .step-buttons {
     margin-top: 2rem; }
     .add-note-modal-dialog .dialog-content .step-buttons .next-button {

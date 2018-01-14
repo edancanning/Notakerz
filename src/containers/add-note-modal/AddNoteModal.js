@@ -15,10 +15,13 @@ import {
   IconButton,
   TextField,
   FormHelperText,
-  InputAdornment
+  InputAdornment,
+  CircularProgress,
+  Snackbar,
+  Slide
 } from "material-ui";
 import axios from "axios";
-import { Close } from "mdi-material-ui";
+import { Close, CloudUpload } from "mdi-material-ui";
 
 import AddNoteStepper from "../../components/add-note-stepper/AddNoteStepper";
 import { courseToTitle } from "../../utils/utils";
@@ -28,6 +31,10 @@ const TITLE_MAX_LENGTH = 50;
 const DESCRIPTION_MAX_LENGTH = 250;
 const TITLE_MIN_LENGTH = 10;
 const DESCRIPTION_MIN_LENGTH = 50;
+const FILES_MAX_NUMBER = 6;
+const FILES_MAX_SIZE = 20; // MB
+const BYTE_TO_MEGABYTE = 1024 * 1024;
+const SNACKBAR_DURATION = 6000;
 
 class AddNoteModal extends React.Component {
   constructor(props) {
@@ -38,7 +45,8 @@ class AddNoteModal extends React.Component {
         "For each ad campaign ",
         "For each ad campaign "
       ],
-      activeStep: 0,
+      activeStep: 1,
+      loading: false,
       university: "",
       course: "",
       title: "",
@@ -49,14 +57,17 @@ class AddNoteModal extends React.Component {
       titleError: false,
       descriptionError: false,
       priceError: false,
+      maxFilesSnackbar: false,
+      maxFilesSizeSnackbar: false,
       courses: [],
-      universities: []
+      universities: [],
+      files: []
     };
   }
 
   componentDidMount = () => {
     axios
-      .get("/courses")
+      .get("api/courses")
       .then(res => {
         console.log("GET /courses");
         this.setState({ courses: res.data.courses });
@@ -66,7 +77,7 @@ class AddNoteModal extends React.Component {
       });
 
     axios
-      .get("/universities")
+      .get("api/universities")
       .then(res => {
         console.log("GET /universities");
         this.setState({ universities: res.data.universities });
@@ -152,7 +163,68 @@ class AddNoteModal extends React.Component {
     }
   };
 
+  handleUploadClick = () => {
+    if (!this.state.loading) {
+      this.fileUploadInput.click();
+      // this.setState(
+      //   {
+      //     loading: true
+      //   },
+      //   () => {
+      //     this.timer = setTimeout(() => {
+      //       this.setState({
+      //         loading: false
+      //       });
+      //     }, 3000000);
+      //   }
+      // );
+    }
+  };
+
+  checkFiles = files => {
+    if (files.length > FILES_MAX_NUMBER) {
+      this.setState({
+        maxFilesSnackbar: true
+      });
+      return false;
+    }
+
+    // check that sums doesn't exceed some value
+    var sizeSum = 0;
+    for (var i = 0; i < files.length; i++) {
+      sizeSum += files[i].size;
+    }
+
+    if (sizeSum > FILES_MAX_SIZE * BYTE_TO_MEGABYTE) {
+      this.setState({
+        maxFilesSizeSnackbar: true
+      });
+      return false;
+    }
+
+    return true;
+  };
+
+  handleFileUpload = event => {
+    var files = event.target.files;
+    console.log(files);
+    if (this.checkFiles(files)) {
+      var data = new FormData();
+      data.append("files", files);
+      axios
+        .post("api/drafts", data)
+        .then(res => {
+          console.log("posted");
+        })
+        .catch(e => {
+          //TODO make this some user message
+          console.log(e);
+        });
+    }
+  };
+
   //
+
   handleNext = () => {
     this.setState({
       activeStep: this.state.activeStep + 1
@@ -175,7 +247,7 @@ class AddNoteModal extends React.Component {
   getStep = index => {
     if (index === 0) {
       return (
-        <div>
+        <div className="step-one">
           <form className="form" autoComplete="off">
             <FormControl
               required
@@ -284,7 +356,25 @@ class AddNoteModal extends React.Component {
       );
     } else if (index === 1) {
       return (
-        <div>
+        <div className="step-two">
+          <div className="upload-button-container">
+            <p className="title">Let's upload some files!</p>
+            <div className="loader-container">
+              <Button fab color="accent" onClick={this.handleUploadClick}>
+                <input
+                  ref={input => (this.fileUploadInput = input)}
+                  onChange={this.handleFileUpload}
+                  style={{ visibility: "hidden", position: "absolute" }}
+                  type="file"
+                  multiple
+                />
+                <CloudUpload />
+              </Button>
+              {this.state.loading && (
+                <CircularProgress className="loader" size={68} />
+              )}
+            </div>
+          </div>
           <div className="step-buttons">
             <Button onClick={this.handleBack}>Back</Button>
             <Button
@@ -296,6 +386,36 @@ class AddNoteModal extends React.Component {
               Next
             </Button>
           </div>
+          <Snackbar
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left"
+            }}
+            autoHideDuration={SNACKBAR_DURATION}
+            open={this.state.maxFilesSnackbar}
+            transition={props => <Slide direction="up" {...props} />}
+            onClose={() => {
+              this.setState({
+                maxFilesSnackbar: false
+              });
+            }}
+            message={`Maximum ${FILES_MAX_NUMBER} files per note`}
+          />
+          <Snackbar
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left"
+            }}
+            autoHideDuration={SNACKBAR_DURATION}
+            open={this.state.maxFilesSizeSnackbar}
+            transition={props => <Slide direction="up" {...props} />}
+            onClose={() => {
+              this.setState({
+                maxFilesSizeSnackbar: false
+              });
+            }}
+            message={`Maximum total of ${FILES_MAX_SIZE}MB per note`}
+          />
         </div>
       );
     } else if (index === 2) {

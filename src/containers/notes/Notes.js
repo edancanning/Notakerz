@@ -10,13 +10,13 @@ class Notes extends React.Component {
     super();
     this.state = {
       notes: [],
-      modalOpen: false
+      modalOpen: true
     };
   }
 
   componentDidMount() {
     axios
-      .get("/notes")
+      .get("api/notes")
       .then(res => {
         console.log("GET /notes");
         this.setState({ notes: res.data.notes });
