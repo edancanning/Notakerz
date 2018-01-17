@@ -5,17 +5,9 @@ import {
   DialogTitle,
   DialogActions,
   DialogContent,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Input,
-  Select,
   AppBar,
   Toolbar,
   IconButton,
-  TextField,
-  FormHelperText,
-  InputAdornment,
   CircularProgress,
   Snackbar,
   Slide
@@ -24,7 +16,7 @@ import axios from "axios";
 import { Close, CloudUpload } from "mdi-material-ui";
 
 import AddNoteStepper from "../../components/add-note-stepper/AddNoteStepper";
-import { courseToTitle } from "../../utils/utils";
+import StepOne from "../../components/steps/step-one/StepOne";
 import "./addNoteModal.css";
 
 const TITLE_MAX_LENGTH = 50;
@@ -67,7 +59,7 @@ class AddNoteModal extends React.Component {
 
   componentDidMount = () => {
     axios
-      .get("api/courses")
+      .get("/courses")
       .then(res => {
         console.log("GET /courses");
         this.setState({ courses: res.data.courses });
@@ -77,7 +69,7 @@ class AddNoteModal extends React.Component {
       });
 
     axios
-      .get("api/universities")
+      .get("/universities")
       .then(res => {
         console.log("GET /universities");
         this.setState({ universities: res.data.universities });
@@ -166,18 +158,6 @@ class AddNoteModal extends React.Component {
   handleUploadClick = () => {
     if (!this.state.loading) {
       this.fileUploadInput.click();
-      // this.setState(
-      //   {
-      //     loading: true
-      //   },
-      //   () => {
-      //     this.timer = setTimeout(() => {
-      //       this.setState({
-      //         loading: false
-      //       });
-      //     }, 3000000);
-      //   }
-      // );
     }
   };
 
@@ -206,21 +186,27 @@ class AddNoteModal extends React.Component {
   };
 
   handleFileUpload = event => {
+    this.setState({
+      loading: true
+    });
     var files = event.target.files;
-    console.log(files);
-    if (this.checkFiles(files)) {
-      var data = new FormData();
-      data.append("files", files);
-      axios
-        .post("api/drafts", data)
-        .then(res => {
-          console.log("posted");
-        })
-        .catch(e => {
-          //TODO make this some user message
-          console.log(e);
-        });
+    var uploaders = [];
+    for (let i = 0; i < files.length; i++) {
+      const formData = new FormData();
+      formData.append("file", files[i]);
+      uploaders.push(axios.post("/drafts", formData));
     }
+
+    Promise.all(uploaders)
+      .then(files => {
+        this.setState({
+          files: files.map(file => file.data.file),
+          loading: false
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
 
   //
@@ -247,112 +233,28 @@ class AddNoteModal extends React.Component {
   getStep = index => {
     if (index === 0) {
       return (
-        <div className="step-one">
-          <form className="form" autoComplete="off">
-            <FormControl
-              required
-              className="input-field"
-              error={this.state.universityError}
-            >
-              <InputLabel htmlFor="university">University</InputLabel>
-              <Select
-                value={this.state.university}
-                onChange={this.handleInputChange}
-                input={<Input name="university" id="university" />}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                {this.state.universities.map(university => (
-                  <MenuItem key={university._id} value={university._id}>
-                    {university.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <FormControl
-              required
-              className="input-field"
-              error={this.state.courseError}
-            >
-              <InputLabel htmlFor="course">Course</InputLabel>
-              <Select
-                value={this.state.course}
-                onChange={this.handleInputChange}
-                input={<Input name="course" id="course" />}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                {this.state.courses.map((course, index) => (
-                  <MenuItem key={course._id} value={course._id}>
-                    {courseToTitle(
-                      course.code,
-                      course.semester,
-                      course.year,
-                      course.professor
-                    )}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <TextField
-              error={this.state.titleError}
-              name="title"
-              className="input-field"
-              required
-              id="course-title"
-              label="Course Title"
-              value={this.state.title}
-              margin="normal"
-              helperText={`Min ${TITLE_MIN_LENGTH} characters`}
-              onChange={this.handleTitleChange}
-            />
-            <TextField
-              error={this.state.descriptionError}
-              name="description"
-              className="input-field"
-              required
-              id="course-description"
-              label="Course Description"
-              value={this.state.description}
-              margin="normal"
-              multiline
-              onChange={this.handleDescriptionChange}
-              helperText={`Min ${DESCRIPTION_MIN_LENGTH} characters`}
-            />
-            <FormControl
-              required
-              className="input-field"
-              error={this.state.priceError}
-            >
-              <InputLabel htmlFor="price">Price</InputLabel>
-              <Input
-                id="price"
-                value={this.state.price}
-                onChange={this.handlePriceChange}
-                name="price"
-                startAdornment={
-                  <InputAdornment position="start">$</InputAdornment>
-                }
-              />
-              <FormHelperText>Max $9.99</FormHelperText>
-            </FormControl>
-          </form>
-          <div className="step-buttons">
-            <Button disabled onClick={this.handleBack}>
-              Back
-            </Button>
-            <Button
-              className="next-button"
-              raised
-              color="primary"
-              onClick={this.handleFormNext}
-            >
-              Next
-            </Button>
-          </div>
-        </div>
+        <StepOne
+          universityError={this.state.universityError}
+          university={this.state.university}
+          universities={this.state.universities}
+          courseError={this.state.courseError}
+          course={this.state.course}
+          courses={this.state.courses}
+          titleError={this.state.titleError}
+          title={this.state.title}
+          descriptionError={this.state.descriptionError}
+          description={this.state.description}
+          priceError={this.state.priceError}
+          price={this.state.price}
+          handleInputChange={this.handleInputChange}
+          handleTitleChange={this.handleTitleChange}
+          handleDescriptionChange={this.handleDescriptionChange}
+          handlePriceChange={this.handlePriceChange}
+          handleBack={this.handleBack}
+          handleFormNext={this.handleFormNext}
+          TITLE_MIN_LENGTH={TITLE_MIN_LENGTH}
+          DESCRIPTION_MIN_LENGTH={DESCRIPTION_MIN_LENGTH}
+        />
       );
     } else if (index === 1) {
       return (

@@ -16,7 +16,7 @@ class Notes extends React.Component {
 
   componentDidMount() {
     axios
-      .get("api/notes")
+      .get("/notes")
       .then(res => {
         console.log("GET /notes");
         this.setState({ notes: res.data.notes });
