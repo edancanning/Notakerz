@@ -8,43 +8,49 @@ var StepTwo = props => {
   var fileUploadInput; // will contain ref to hidden file upload button
   return (
     <div className="step-two-component">
-      <div className="upload-button-container">
-        <p className="title">Let's upload some files!</p>
-        <div className="loader-container">
-          <Button
-            fab
-            color="accent"
-            onClick={() => {
-              if (!props.loading) {
-                fileUploadInput.click();
-              }
-            }}
-          >
-            <input
-              ref={input => {
-                fileUploadInput = input;
-              }}
-              onChange={props.handleFileUpload}
-              style={{ visibility: "hidden", position: "absolute" }}
-              type="file"
-              multiple
-            />
-            <CloudUpload />
-          </Button>
-          {props.loading && <CircularProgress className="loader" size={68} />}
+      {props.files.length > 0 ? (
+        <div className="file-thumbnail-cards">
+          yo
+          <div className="step-buttons">
+            <Button onClick={props.handleBack}>Back</Button>
+            <Button
+              className="next-button"
+              raised
+              color="primary"
+              onClick={props.handleNext}
+            >
+              Next
+            </Button>
+          </div>
         </div>
-      </div>
-      <div className="step-buttons">
-        <Button onClick={props.handleBack}>Back</Button>
-        <Button
-          className="next-button"
-          raised
-          color="primary"
-          onClick={props.handleNext}
-        >
-          Next
-        </Button>
-      </div>
+      ) : (
+        <div className="upload-button-container">
+          <p className="title">Let's upload some files!</p>
+          <div className="loader-container">
+            <Button
+              fab
+              color="accent"
+              onClick={() => {
+                if (!props.loading) {
+                  fileUploadInput.click();
+                }
+              }}
+            >
+              <input
+                ref={input => {
+                  fileUploadInput = input;
+                }}
+                onChange={props.handleFileUpload}
+                style={{ visibility: "hidden", position: "absolute" }}
+                type="file"
+                multiple
+              />
+              <CloudUpload />
+            </Button>
+            {props.loading && <CircularProgress className="loader" size={68} />}
+          </div>
+        </div>
+      )}
       <Snackbar
         anchorOrigin={{
           vertical: "bottom",

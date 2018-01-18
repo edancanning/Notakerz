@@ -269,6 +269,7 @@ class AddNoteModal extends React.Component {
           FILES_MAX_NUMBER={FILES_MAX_NUMBER}
           FILES_MAX_SIZE={FILES_MAX_SIZE}
           snackBarHandler={this.snackBarHandler}
+          files={this.state.files}
         />
       );
     } else if (index === 2) {
