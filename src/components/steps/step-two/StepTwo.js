@@ -1,6 +1,8 @@
 import React from "react";
-import { Button, CircularProgress, Snackbar, Slide } from "material-ui";
+import { Button, CircularProgress, Snackbar, Slide, Grid } from "material-ui";
 import { CloudUpload } from "mdi-material-ui";
+
+import ThumbnailCard from "../../thumbnail-card/ThumbnailCard";
 
 import "./stepTwo.css";
 
@@ -9,15 +11,27 @@ var StepTwo = props => {
   return (
     <div className="step-two-component">
       {props.files.length > 0 ? (
-        <div className="file-thumbnail-cards">
-          yo
+        <div>
+          <p className="please-select">
+            Please select one file to be the thumbnail of your note
+          </p>
+          <Grid className="file-thumbnail-cards" container spacing={24}>
+            {props.files.map(file => (
+              <Grid key={file.name} item xs={12} sm={6} lg={4}>
+                <ThumbnailCard
+                  {...file}
+                  thumbnailClickHandler={props.thumbnailClickHandler}
+                />
+              </Grid>
+            ))}
+          </Grid>
           <div className="step-buttons">
             <Button onClick={props.handleBack}>Back</Button>
             <Button
               className="next-button"
               raised
               color="primary"
-              onClick={props.handleNext}
+              onClick={props.stepTwoNext}
             >
               Next
             </Button>
@@ -76,6 +90,19 @@ var StepTwo = props => {
           props.snackBarHandler("maxFilesSizeSnackbar", false);
         }}
         message={`Maximum total of ${props.FILES_MAX_SIZE}MB per note`}
+      />
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left"
+        }}
+        autoHideDuration={props.SNACKBAR_DURATION}
+        open={props.chooseThumbnailSnackbar}
+        transition={props => <Slide direction="up" {...props} />}
+        onClose={() => {
+          props.snackBarHandler("chooseThumbnailSnackbar", false);
+        }}
+        message={`Please select a thumbnail before continuing`}
       />
     </div>
   );

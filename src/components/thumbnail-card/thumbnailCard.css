@@ -1,0 +1,43 @@
+.thumbnail-card-component {
+  cursor: pointer; }
+  .thumbnail-card-component .ripple {
+    width: 100%;
+    display: block; }
+    .thumbnail-card-component .ripple .body .thumbnail {
+      width: 100%;
+      height: 10rem;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover; }
+    .thumbnail-card-component .ripple .footer {
+      transition: all 0.2s ease-in-out;
+      padding: 0.25rem 0.4rem;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center; }
+      .thumbnail-card-component .ripple .footer.highlight {
+        background-color: #03a9f4; }
+        .thumbnail-card-component .ripple .footer.highlight .file-icon {
+          color: #ffffff; }
+        .thumbnail-card-component .ripple .footer.highlight .file-name {
+          color: #ffffff; }
+      .thumbnail-card-component .ripple .footer .file-icon {
+        color: #8c8b8b;
+        display: inline-block;
+        margin-right: 0.35rem;
+        width: 1.3rem; }
+      .thumbnail-card-component .ripple .footer .file-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        line-height: 1.3;
+        font-size: 1rem;
+        color: #3d3d3d;
+        font-size: 0.8rem; }

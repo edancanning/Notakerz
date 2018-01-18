@@ -49,6 +49,7 @@ class AddNoteModal extends React.Component {
       priceError: false,
       maxFilesSnackbar: false,
       maxFilesSizeSnackbar: false,
+      chooseThumbnailSnackbar: false,
       courses: [],
       universities: [],
       files: []
@@ -115,7 +116,7 @@ class AddNoteModal extends React.Component {
     });
   };
 
-  handleFormNext = () => {
+  stepOneNext = () => {
     var verified = true;
 
     if (this.state.university === "") {
@@ -153,6 +154,26 @@ class AddNoteModal extends React.Component {
     }
   };
 
+  stepTwoNext = () => {
+    var verified = true;
+
+    // check that at least one file is highlighted as thumbnail
+    var highlighted = this.state.files.find(file => {
+      return file.highlight;
+    });
+
+    if (!highlighted) {
+      this.setState({ chooseThumbnailSnackbar: true });
+      verified = false;
+    }
+
+    if (verified) {
+      this.setState({
+        activeStep: this.state.activeStep + 1
+      });
+    }
+  };
+
   checkFiles = files => {
     if (files.length > FILES_MAX_NUMBER) {
       this.setState({
@@ -173,6 +194,8 @@ class AddNoteModal extends React.Component {
       });
       return false;
     }
+
+    // TODO: Check that files are in correct format
 
     return true;
   };
@@ -206,6 +229,23 @@ class AddNoteModal extends React.Component {
   snackBarHandler = (name, bool) => {
     this.setState({
       [name]: bool
+    });
+  };
+
+  thumbnailClickHandler = name => {
+    this.setState({
+      files: this.state.files.map(file => {
+        if (file.name === name) {
+          var newFile = Object.assign({}, file);
+          newFile.highlight = true;
+          return newFile;
+        } else if (file.highlight) {
+          var newFile = Object.assign({}, file);
+          delete newFile.highlight;
+          return newFile;
+        }
+        return file;
+      })
     });
   };
 
@@ -251,7 +291,7 @@ class AddNoteModal extends React.Component {
           handleDescriptionChange={this.handleDescriptionChange}
           handlePriceChange={this.handlePriceChange}
           handleBack={this.handleBack}
-          handleFormNext={this.handleFormNext}
+          stepOneNext={this.stepOneNext}
           TITLE_MIN_LENGTH={TITLE_MIN_LENGTH}
           DESCRIPTION_MIN_LENGTH={DESCRIPTION_MIN_LENGTH}
         />
@@ -269,7 +309,10 @@ class AddNoteModal extends React.Component {
           FILES_MAX_NUMBER={FILES_MAX_NUMBER}
           FILES_MAX_SIZE={FILES_MAX_SIZE}
           snackBarHandler={this.snackBarHandler}
+          thumbnailClickHandler={this.thumbnailClickHandler}
           files={this.state.files}
+          stepTwoNext={this.stepTwoNext}
+          chooseThumbnailSnackbar={this.state.chooseThumbnailSnackbar}
         />
       );
     } else if (index === 2) {

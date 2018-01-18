@@ -1,0 +1,43 @@
+@import "../../utils/variables";
+.thumbnail-card-component {
+  cursor: pointer;
+  .ripple {
+    width: 100%;
+    display: block;
+    .body {
+      .thumbnail {
+        width: 100%;
+        height: 10rem;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+    }
+    .footer {
+      &.highlight {
+        background-color: $primary;
+        .file-icon {
+          color: #ffffff;
+        }
+        .file-name {
+          color: #ffffff;
+        }
+      }
+      transition: all 0.2s ease-in-out;
+      padding: 0.25rem 0.4rem;
+      @include flexbox-vertical-center;
+      .file-icon {
+        color: $icon-color;
+        display: inline-block;
+        margin-right: 0.35rem;
+        width: 1.3rem;
+      }
+      .file-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        @include p-small;
+      }
+    }
+  }
+}

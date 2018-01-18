@@ -1,5 +1,9 @@
 @import "../../../utils/variables";
 .step-two-component {
+  .please-select {
+    @include p;
+    margin: 1rem;
+  }
   .upload-button-container {
     text-align: center;
     margin-top: 15vh;
