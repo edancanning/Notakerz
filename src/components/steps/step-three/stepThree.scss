@@ -1,0 +1,20 @@
+@import "../../../utils/variables";
+.step-three-component {
+  .agreement {
+    text-align: center;
+    margin-top: 15vh;
+    margin-bottom: 17vh;
+    .message {
+      @include h3;
+    }
+    .terms {
+      margin-top: 0.2rem;
+      @include p-light;
+      span {
+        cursor: pointer;
+        color: $accent;
+        text-decoration: underline;
+      }
+    }
+  }
+}

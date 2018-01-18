@@ -50,6 +50,10 @@ class Notes extends React.Component {
     this.setState({ modalOpen: false });
   };
 
+  updateNotes = notes => {
+    this.setState({ notes });
+  };
+
   render() {
     return (
       <div className="notes-container">
@@ -73,6 +77,7 @@ class Notes extends React.Component {
         <AddNoteModal
           open={this.state.modalOpen}
           handleModalClose={this.handleModalClose}
+          updateNotes={this.updateNotes}
         />
       </div>
     );

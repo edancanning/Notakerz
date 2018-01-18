@@ -104,7 +104,7 @@ var StepOne = props => (
       <Button
         className="next-button"
         raised
-        color="primary"
+        color="accent"
         onClick={props.stepOneNext}
       >
         Next

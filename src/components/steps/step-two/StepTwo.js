@@ -6,6 +6,16 @@ import ThumbnailCard from "../../thumbnail-card/ThumbnailCard";
 
 import "./stepTwo.css";
 
+function printAllowedFileTypes(fileTypes) {
+  var printedFileTypes = "";
+  for (let i = 0; i < fileTypes.length - 2; i++) {
+    printedFileTypes += fileTypes[i] + ", ";
+  }
+  printedFileTypes += fileTypes[fileTypes.length - 2] + " ";
+  printedFileTypes += "or " + fileTypes[fileTypes.length - 1];
+  return printedFileTypes;
+}
+
 var StepTwo = props => {
   var fileUploadInput; // will contain ref to hidden file upload button
   return (
@@ -13,7 +23,8 @@ var StepTwo = props => {
       {props.files.length > 0 ? (
         <div>
           <p className="please-select">
-            Please select one file to be the thumbnail of your note
+            Please select one file to be the thumbnail of your note{" "}
+            <span>*</span>
           </p>
           <Grid className="file-thumbnail-cards" container spacing={24}>
             {props.files.map(file => (
@@ -25,21 +36,29 @@ var StepTwo = props => {
               </Grid>
             ))}
           </Grid>
-          <div className="step-buttons">
-            <Button onClick={props.handleBack}>Back</Button>
-            <Button
-              className="next-button"
-              raised
-              color="primary"
-              onClick={props.stepTwoNext}
-            >
-              Next
+          <div className="step-buttons-container">
+            <Button className="clear-button" onClick={props.handleFileClear}>
+              Clear
             </Button>
+            <div className="step-buttons">
+              <Button onClick={props.handleBack}>Back</Button>
+              <Button
+                className="next-button"
+                raised
+                color="accent"
+                onClick={props.stepTwoNext}
+              >
+                Next
+              </Button>
+            </div>
           </div>
         </div>
       ) : (
         <div className="upload-button-container">
           <p className="title">Let's upload some files!</p>
+          <p className="file-types">
+            {printAllowedFileTypes(props.ALLOWED_FILE_TYPE_PRINT)}
+          </p>
           <div className="loader-container">
             <Button
               fab
@@ -102,7 +121,20 @@ var StepTwo = props => {
         onClose={() => {
           props.snackBarHandler("chooseThumbnailSnackbar", false);
         }}
-        message={`Please select a thumbnail before continuing`}
+        message={"Please select a thumbnail before continuing"}
+      />
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left"
+        }}
+        autoHideDuration={props.SNACKBAR_DURATION}
+        open={props.illegalFileTypeSnackbar}
+        transition={props => <Slide direction="up" {...props} />}
+        onClose={() => {
+          props.snackBarHandler("illegalFileTypeSnackbar", false);
+        }}
+        message={"Illegal file type"}
       />
     </div>
   );

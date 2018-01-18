@@ -20,6 +20,7 @@
 .add-note-modal-dialog .dialog-content {
   padding: 0; }
   .add-note-modal-dialog .dialog-content .step-buttons {
+    float: right;
     margin-top: 2rem; }
     .add-note-modal-dialog .dialog-content .step-buttons .next-button {
       color: #ffffff; }

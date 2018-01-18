@@ -13,8 +13,6 @@ import axios from "axios";
 import { Close } from "mdi-material-ui";
 
 import AddNoteStepper from "../../components/add-note-stepper/AddNoteStepper";
-import StepOne from "../../components/steps/step-one/StepOne";
-import StepTwo from "../../components/steps/step-two/StepTwo";
 import "./addNoteModal.css";
 
 const TITLE_MAX_LENGTH = 50;
@@ -25,6 +23,12 @@ const FILES_MAX_NUMBER = 6;
 const FILES_MAX_SIZE = 20; // MB
 const BYTE_TO_MEGABYTE = 1024 * 1024;
 const SNACKBAR_DURATION = 6000;
+const ALLOWED_FILE_TYPE = [
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "application/pdf",
+  "application/msword"
+];
+const ALLOWED_FILE_TYPE_PRINT = [".doc", ".docx", ".pdf"];
 
 class AddNoteModal extends React.Component {
   constructor(props) {
@@ -35,7 +39,7 @@ class AddNoteModal extends React.Component {
         "For each ad campaign ",
         "For each ad campaign "
       ],
-      activeStep: 1,
+      activeStep: 0,
       loading: false,
       university: "",
       course: "",
@@ -50,6 +54,7 @@ class AddNoteModal extends React.Component {
       maxFilesSnackbar: false,
       maxFilesSizeSnackbar: false,
       chooseThumbnailSnackbar: false,
+      illegalFileTypeSnackbar: false,
       courses: [],
       universities: [],
       files: []
@@ -174,6 +179,36 @@ class AddNoteModal extends React.Component {
     }
   };
 
+  stepThreeNext = () => {
+    // TODO handle any errors
+    // TODO pass in user jwt
+    console.log("PUBLISH");
+    var note = {
+      university: this.state.university,
+      course: this.state.course,
+      title: this.state.title,
+      description: this.state.description,
+      price: parseFloat(this.state.price),
+      files: this.state.files,
+      notaker: {
+        _id: "5a4fab9dd41bff1e5c161e85",
+        handle: "edancanning",
+        __v: 0
+      }
+    };
+    console.log("New note", note);
+    axios
+      .post("/note", { note })
+      .then(res => {
+        console.log(res.data.notes);
+        this.setState({
+          activeStep: this.state.activeStep + 1
+        });
+        this.props.updateNotes(res.data.notes);
+      })
+      .catch(e => console.log(e));
+  };
+
   checkFiles = files => {
     if (files.length > FILES_MAX_NUMBER) {
       this.setState({
@@ -195,6 +230,18 @@ class AddNoteModal extends React.Component {
       return false;
     }
 
+    for (let file of files) {
+      var allowedType = ALLOWED_FILE_TYPE.find(
+        fileType => file.type === fileType
+      );
+      if (!allowedType) {
+        this.setState({
+          illegalFileTypeSnackbar: true
+        });
+        return false;
+      }
+    }
+
     // TODO: Check that files are in correct format
 
     return true;
@@ -202,6 +249,7 @@ class AddNoteModal extends React.Component {
 
   handleFileUpload = event => {
     var files = event.target.files;
+    console.log(files);
     if (this.checkFiles(files)) {
       this.setState({
         loading: true
@@ -226,6 +274,13 @@ class AddNoteModal extends React.Component {
     }
   };
 
+  // clear the selected files
+  handleFileClear = () => {
+    this.setState({
+      files: []
+    });
+  };
+
   snackBarHandler = (name, bool) => {
     this.setState({
       [name]: bool
@@ -233,14 +288,14 @@ class AddNoteModal extends React.Component {
   };
 
   thumbnailClickHandler = name => {
+    var newFile;
     this.setState({
       files: this.state.files.map(file => {
         if (file.name === name) {
-          var newFile = Object.assign({}, file);
-          newFile.highlight = true;
+          newFile = Object.assign({ highlight: true }, file);
           return newFile;
         } else if (file.highlight) {
-          var newFile = Object.assign({}, file);
+          newFile = Object.assign({}, file);
           delete newFile.highlight;
           return newFile;
         }
@@ -269,56 +324,6 @@ class AddNoteModal extends React.Component {
     });
   };
   //
-
-  getStep = index => {
-    if (index === 0) {
-      return (
-        <StepOne
-          universityError={this.state.universityError}
-          university={this.state.university}
-          universities={this.state.universities}
-          courseError={this.state.courseError}
-          course={this.state.course}
-          courses={this.state.courses}
-          titleError={this.state.titleError}
-          title={this.state.title}
-          descriptionError={this.state.descriptionError}
-          description={this.state.description}
-          priceError={this.state.priceError}
-          price={this.state.price}
-          handleInputChange={this.handleInputChange}
-          handleTitleChange={this.handleTitleChange}
-          handleDescriptionChange={this.handleDescriptionChange}
-          handlePriceChange={this.handlePriceChange}
-          handleBack={this.handleBack}
-          stepOneNext={this.stepOneNext}
-          TITLE_MIN_LENGTH={TITLE_MIN_LENGTH}
-          DESCRIPTION_MIN_LENGTH={DESCRIPTION_MIN_LENGTH}
-        />
-      );
-    } else if (index === 1) {
-      return (
-        <StepTwo
-          loading={this.state.loading}
-          maxFilesSnackbar={this.state.maxFilesSnackbar}
-          maxFilesSizeSnackbar={this.state.maxFilesSizeSnackbar}
-          handleFileUpload={this.handleFileUpload}
-          handleBack={this.handleBack}
-          handleNext={this.handleNext}
-          SNACKBAR_DURATION={SNACKBAR_DURATION}
-          FILES_MAX_NUMBER={FILES_MAX_NUMBER}
-          FILES_MAX_SIZE={FILES_MAX_SIZE}
-          snackBarHandler={this.snackBarHandler}
-          thumbnailClickHandler={this.thumbnailClickHandler}
-          files={this.state.files}
-          stepTwoNext={this.stepTwoNext}
-          chooseThumbnailSnackbar={this.state.chooseThumbnailSnackbar}
-        />
-      );
-    } else if (index === 2) {
-      return <div>yo3</div>;
-    }
-  };
 
   render() {
     var fullScreen = false;
@@ -349,11 +354,46 @@ class AddNoteModal extends React.Component {
           <DialogContent className="dialog-content">
             <AddNoteStepper
               steps={this.state.steps}
+              SNACKBAR_DURATION={SNACKBAR_DURATION}
+              ALLOWED_FILE_TYPE_PRINT={ALLOWED_FILE_TYPE_PRINT}
               getStep={this.getStep}
               handleReset={this.handleReset}
               handleBack={this.handleBack}
               handleNext={this.handleNext}
               activeStep={this.state.activeStep}
+              universityError={this.state.universityError}
+              university={this.state.university}
+              universities={this.state.universities}
+              courseError={this.state.courseError}
+              course={this.state.course}
+              courses={this.state.courses}
+              titleError={this.state.titleError}
+              title={this.state.title}
+              descriptionError={this.state.descriptionError}
+              description={this.state.description}
+              priceError={this.state.priceError}
+              price={this.state.price}
+              handleInputChange={this.handleInputChange}
+              handleTitleChange={this.handleTitleChange}
+              handleDescriptionChange={this.handleDescriptionChange}
+              handlePriceChange={this.handlePriceChange}
+              stepOneNext={this.stepOneNext}
+              TITLE_MIN_LENGTH={TITLE_MIN_LENGTH}
+              DESCRIPTION_MIN_LENGTH={DESCRIPTION_MIN_LENGTH}
+              loading={this.state.loading}
+              maxFilesSnackbar={this.state.maxFilesSnackbar}
+              maxFilesSizeSnackbar={this.state.maxFilesSizeSnackbar}
+              handleFileUpload={this.handleFileUpload}
+              FILES_MAX_NUMBER={FILES_MAX_NUMBER}
+              FILES_MAX_SIZE={FILES_MAX_SIZE}
+              snackBarHandler={this.snackBarHandler}
+              thumbnailClickHandler={this.thumbnailClickHandler}
+              files={this.state.files}
+              stepTwoNext={this.stepTwoNext}
+              stepThreeNext={this.stepThreeNext}
+              chooseThumbnailSnackbar={this.state.chooseThumbnailSnackbar}
+              illegalFileTypeSnackbar={this.state.illegalFileTypeSnackbar}
+              handleFileClear={this.handleFileClear}
             />
           </DialogContent>
           <DialogActions className="dialog-actions">
