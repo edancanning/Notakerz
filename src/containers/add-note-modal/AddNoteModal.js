@@ -7,16 +7,14 @@ import {
   DialogContent,
   AppBar,
   Toolbar,
-  IconButton,
-  CircularProgress,
-  Snackbar,
-  Slide
+  IconButton
 } from "material-ui";
 import axios from "axios";
-import { Close, CloudUpload } from "mdi-material-ui";
+import { Close } from "mdi-material-ui";
 
 import AddNoteStepper from "../../components/add-note-stepper/AddNoteStepper";
 import StepOne from "../../components/steps/step-one/StepOne";
+import StepTwo from "../../components/steps/step-two/StepTwo";
 import "./addNoteModal.css";
 
 const TITLE_MAX_LENGTH = 50;
@@ -155,12 +153,6 @@ class AddNoteModal extends React.Component {
     }
   };
 
-  handleUploadClick = () => {
-    if (!this.state.loading) {
-      this.fileUploadInput.click();
-    }
-  };
-
   checkFiles = files => {
     if (files.length > FILES_MAX_NUMBER) {
       this.setState({
@@ -186,27 +178,35 @@ class AddNoteModal extends React.Component {
   };
 
   handleFileUpload = event => {
-    this.setState({
-      loading: true
-    });
     var files = event.target.files;
-    var uploaders = [];
-    for (let i = 0; i < files.length; i++) {
-      const formData = new FormData();
-      formData.append("file", files[i]);
-      uploaders.push(axios.post("/drafts", formData));
-    }
-
-    Promise.all(uploaders)
-      .then(files => {
-        this.setState({
-          files: files.map(file => file.data.file),
-          loading: false
-        });
-      })
-      .catch(e => {
-        console.log(e);
+    if (this.checkFiles(files)) {
+      this.setState({
+        loading: true
       });
+      var uploaders = [];
+      for (let i = 0; i < files.length; i++) {
+        const formData = new FormData();
+        formData.append("file", files[i]);
+        uploaders.push(axios.post("/drafts", formData));
+      }
+
+      Promise.all(uploaders)
+        .then(files => {
+          this.setState({
+            files: files.map(file => file.data.file),
+            loading: false
+          });
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
+  };
+
+  snackBarHandler = (name, bool) => {
+    this.setState({
+      [name]: bool
+    });
   };
 
   //
@@ -258,67 +258,18 @@ class AddNoteModal extends React.Component {
       );
     } else if (index === 1) {
       return (
-        <div className="step-two">
-          <div className="upload-button-container">
-            <p className="title">Let's upload some files!</p>
-            <div className="loader-container">
-              <Button fab color="accent" onClick={this.handleUploadClick}>
-                <input
-                  ref={input => (this.fileUploadInput = input)}
-                  onChange={this.handleFileUpload}
-                  style={{ visibility: "hidden", position: "absolute" }}
-                  type="file"
-                  multiple
-                />
-                <CloudUpload />
-              </Button>
-              {this.state.loading && (
-                <CircularProgress className="loader" size={68} />
-              )}
-            </div>
-          </div>
-          <div className="step-buttons">
-            <Button onClick={this.handleBack}>Back</Button>
-            <Button
-              className="next-button"
-              raised
-              color="primary"
-              onClick={this.handleNext}
-            >
-              Next
-            </Button>
-          </div>
-          <Snackbar
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "left"
-            }}
-            autoHideDuration={SNACKBAR_DURATION}
-            open={this.state.maxFilesSnackbar}
-            transition={props => <Slide direction="up" {...props} />}
-            onClose={() => {
-              this.setState({
-                maxFilesSnackbar: false
-              });
-            }}
-            message={`Maximum ${FILES_MAX_NUMBER} files per note`}
-          />
-          <Snackbar
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "left"
-            }}
-            autoHideDuration={SNACKBAR_DURATION}
-            open={this.state.maxFilesSizeSnackbar}
-            transition={props => <Slide direction="up" {...props} />}
-            onClose={() => {
-              this.setState({
-                maxFilesSizeSnackbar: false
-              });
-            }}
-            message={`Maximum total of ${FILES_MAX_SIZE}MB per note`}
-          />
-        </div>
+        <StepTwo
+          loading={this.state.loading}
+          maxFilesSnackbar={this.state.maxFilesSnackbar}
+          maxFilesSizeSnackbar={this.state.maxFilesSizeSnackbar}
+          handleFileUpload={this.handleFileUpload}
+          handleBack={this.handleBack}
+          handleNext={this.handleNext}
+          SNACKBAR_DURATION={SNACKBAR_DURATION}
+          FILES_MAX_NUMBER={FILES_MAX_NUMBER}
+          FILES_MAX_SIZE={FILES_MAX_SIZE}
+          snackBarHandler={this.snackBarHandler}
+        />
       );
     } else if (index === 2) {
       return <div>yo3</div>;

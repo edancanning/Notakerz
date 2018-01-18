@@ -1,0 +1,19 @@
+.step-two-component .upload-button-container {
+  text-align: center;
+  margin-top: 15vh;
+  margin-bottom: 17vh; }
+  .step-two-component .upload-button-container .title {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    color: #535353;
+    font-weight: normal;
+    line-height: 1.2;
+    font-size: 1.1rem;
+    margin-bottom: 1rem; }
+  .step-two-component .upload-button-container .loader-container {
+    display: inline-block;
+    position: relative; }
+    .step-two-component .upload-button-container .loader-container .loader {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); }
