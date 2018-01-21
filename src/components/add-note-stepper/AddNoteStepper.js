@@ -17,10 +17,10 @@ function getStep(index, props) {
   if (index === 0) {
     return (
       <StepOne
-        universityError={props.universityError}
+        universityIdError={props.universityIdError}
         universityId={props.universityId}
         universities={props.universities}
-        courseError={props.courseError}
+        courseIdError={props.courseIdError}
         courseId={props.courseId}
         courses={props.courses}
         titleError={props.titleError}

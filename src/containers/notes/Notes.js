@@ -10,7 +10,7 @@ class Notes extends React.Component {
     super();
     this.state = {
       notes: [],
-      modalOpen: true
+      modalOpen: false
     };
   }
 

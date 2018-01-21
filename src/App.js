@@ -28,6 +28,7 @@ class App extends React.Component {
             <Menus />
             <div className="view-offset">
               <Route exact path="/" component={Notes} />
+              <Route exact path="/notes/:id" component={NotePage} />
             </div>
           </MuiThemeProvider>
         </div>

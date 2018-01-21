@@ -20,7 +20,7 @@ var StepOne = props => (
       <FormControl
         required
         className="input-field"
-        error={props.universityError}
+        error={props.universityIdError}
       >
         <InputLabel htmlFor="university">University</InputLabel>
         <Select
@@ -38,7 +38,7 @@ var StepOne = props => (
           ))}
         </Select>
       </FormControl>
-      <FormControl required className="input-field" error={props.courseError}>
+      <FormControl required className="input-field" error={props.courseIdError}>
         <InputLabel htmlFor="course">Course</InputLabel>
         <Select
           value={props.courseId}

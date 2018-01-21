@@ -44,8 +44,8 @@ class AddNoteModal extends React.Component {
       title: "",
       description: "",
       price: "",
-      universityError: false,
-      courseError: false,
+      universityIdError: false,
+      courseIdError: false,
       titleError: false,
       descriptionError: false,
       priceError: false,
@@ -84,6 +84,7 @@ class AddNoteModal extends React.Component {
   handleInputChange = event => {
     console.log(event.target);
     console.log(event.target.value);
+    console.log(event.target.name + "Error");
     this.setState({
       [event.target.name]: event.target.value,
       [event.target.name + "Error"]: false
@@ -126,12 +127,12 @@ class AddNoteModal extends React.Component {
 
     if (this.state.universityId === "") {
       verified = false;
-      this.setState({ universityError: true });
+      this.setState({ universityIdError: true });
     }
 
     if (this.state.courseId === "") {
       verified = false;
-      this.setState({ courseError: true });
+      this.setState({ courseIdError: true });
     }
 
     if (this.state.title === "" || this.state.title.length < TITLE_MIN_LENGTH) {
@@ -320,8 +321,8 @@ class AddNoteModal extends React.Component {
         title: "",
         description: "",
         price: "",
-        universityError: false,
-        courseError: false,
+        universityIdError: false,
+        courseIdError: false,
         titleError: false,
         descriptionError: false,
         priceError: false,
@@ -375,10 +376,10 @@ class AddNoteModal extends React.Component {
               getStep={this.getStep}
               handleBack={this.handleBack}
               activeStep={this.state.activeStep}
-              universityError={this.state.universityError}
+              universityIdError={this.state.universityIdError}
               universityId={this.state.universityId}
               universities={this.state.universities}
-              courseError={this.state.courseError}
+              courseIdError={this.state.courseIdError}
               courseId={this.state.courseId}
               courses={this.state.courses}
               titleError={this.state.titleError}
