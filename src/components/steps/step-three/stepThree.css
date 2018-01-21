@@ -1,3 +1,15 @@
+.step-three-component .loader-container {
+  text-align: center; }
+  .step-three-component .loader-container .publishing {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    line-height: 1.3;
+    font-size: 1rem;
+    color: #3d3d3d;
+    margin-top: 15vh;
+    margin-bottom: 1rem; }
+  .step-three-component .loader-container .loader {
+    margin-bottom: 17vh; }
+
 .step-three-component .agreement {
   text-align: center;
   margin-top: 15vh;
@@ -7,7 +19,8 @@
     color: #535353;
     font-weight: normal;
     line-height: 1.2;
-    font-size: 1.1rem; }
+    font-size: 1.1rem;
+    font-weight: 500; }
   .step-three-component .agreement .terms {
     margin-top: 0.2rem;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;

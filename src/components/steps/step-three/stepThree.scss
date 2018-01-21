@@ -1,5 +1,16 @@
 @import "../../../utils/variables";
 .step-three-component {
+  .loader-container {
+    text-align: center;
+    .publishing {
+      @include p;
+      margin-top: 15vh;
+      margin-bottom: 1rem;
+    }
+    .loader {
+      margin-bottom: 17vh;
+    }
+  }
   .agreement {
     text-align: center;
     margin-top: 15vh;

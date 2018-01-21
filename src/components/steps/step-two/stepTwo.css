@@ -17,6 +17,7 @@
     font-weight: normal;
     line-height: 1.2;
     font-size: 1.1rem;
+    font-weight: 500;
     margin-bottom: 0.25rem; }
   .step-two-component .upload-button-container .file-types {
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
@@ -37,6 +38,7 @@
 .step-two-component .step-buttons-container {
   margin-top: 2rem; }
   .step-two-component .step-buttons-container .clear-button {
-    float: left; }
+    float: left;
+    margin: 8px 0; }
   .step-two-component .step-buttons-container .step-buttons {
-    margin: 0 !important; }
+    margin-top: 8px !important; }

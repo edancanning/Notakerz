@@ -24,9 +24,9 @@ var StepOne = props => (
       >
         <InputLabel htmlFor="university">University</InputLabel>
         <Select
-          value={props.university}
+          value={props.universityId}
           onChange={props.handleInputChange}
-          input={<Input name="university" id="university" />}
+          input={<Input name="universityId" id="universityId" />}
         >
           <MenuItem value="">
             <em>None</em>
@@ -41,9 +41,9 @@ var StepOne = props => (
       <FormControl required className="input-field" error={props.courseError}>
         <InputLabel htmlFor="course">Course</InputLabel>
         <Select
-          value={props.course}
+          value={props.courseId}
           onChange={props.handleInputChange}
-          input={<Input name="course" id="course" />}
+          input={<Input name="courseId" id="courseId" />}
         >
           <MenuItem value="">
             <em>None</em>

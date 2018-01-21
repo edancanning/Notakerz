@@ -4,7 +4,6 @@ import {
   Step,
   StepContent,
   StepLabel,
-  Typography,
   Button,
   Paper
 } from "material-ui";
@@ -19,10 +18,10 @@ function getStep(index, props) {
     return (
       <StepOne
         universityError={props.universityError}
-        university={props.university}
+        universityId={props.universityId}
         universities={props.universities}
         courseError={props.courseError}
-        course={props.course}
+        courseId={props.courseId}
         courses={props.courses}
         titleError={props.titleError}
         title={props.title}
@@ -43,7 +42,7 @@ function getStep(index, props) {
   } else if (index === 1) {
     return (
       <StepTwo
-        loading={props.loading}
+        loadingFileUpload={props.loadingFileUpload}
         maxFilesSnackbar={props.maxFilesSnackbar}
         maxFilesSizeSnackbar={props.maxFilesSizeSnackbar}
         handleFileUpload={props.handleFileUpload}
@@ -67,6 +66,8 @@ function getStep(index, props) {
       <StepThree
         stepThreeNext={props.stepThreeNext}
         handleNext={props.handleNext}
+        handleBack={props.handleBack}
+        loadingFilePublish={props.loadingFilePublish}
       />
     );
   }
@@ -89,9 +90,17 @@ var AddNoteStepper = props => (
       })}
     </Stepper>
     {props.activeStep === props.steps.length && (
-      <Paper square elevation={0}>
-        <Typography>All steps completed - you&quot;re finished</Typography>
-        <Button onClick={props.handleReset}>Reset</Button>
+      <Paper square elevation={0} className="last-step">
+        <p className="published">Published</p>
+        <p className="message">Keep taking those notes!</p>
+        <Button
+          className="final-close-button"
+          color="accent"
+          raised
+          onClick={props.handleClose}
+        >
+          Close
+        </Button>
       </Paper>
     )}
   </div>

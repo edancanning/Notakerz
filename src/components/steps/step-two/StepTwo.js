@@ -64,7 +64,7 @@ var StepTwo = props => {
               fab
               color="accent"
               onClick={() => {
-                if (!props.loading) {
+                if (!props.loadingFileUpload) {
                   fileUploadInput.click();
                 }
               }}
@@ -80,7 +80,9 @@ var StepTwo = props => {
               />
               <CloudUpload />
             </Button>
-            {props.loading && <CircularProgress className="loader" size={68} />}
+            {props.loadingFileUpload && (
+              <CircularProgress className="loader" size={68} />
+            )}
           </div>
         </div>
       )}

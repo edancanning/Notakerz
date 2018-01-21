@@ -8,6 +8,7 @@
     font-weight: normal;
     line-height: 1.2;
     font-size: 1.1rem;
+    font-weight: 500;
     color: #ffffff; }
 
 .add-note-modal-dialog > div:last-child {
@@ -21,8 +22,10 @@
   padding: 0; }
   .add-note-modal-dialog .dialog-content .step-buttons {
     float: right;
+    margin: 8px;
     margin-top: 2rem; }
     .add-note-modal-dialog .dialog-content .step-buttons .next-button {
+      margin-left: 0.25rem;
       color: #ffffff; }
 
 .add-note-modal-dialog #responsive-dialog-title {

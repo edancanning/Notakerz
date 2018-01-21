@@ -31,7 +31,7 @@ var ThumbnailCard = props => (
           }}
         />
       </div>
-      <div className={props.highlight ? "highlight footer" : "footer"}>
+      <div className={props.isNoteThumbnail ? "highlight footer" : "footer"}>
         {fileIconHandler("pdf")}
         <p className="file-name">{props.name}</p>
       </div>

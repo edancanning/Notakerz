@@ -15,7 +15,7 @@ import { Close } from "mdi-material-ui";
 import AddNoteStepper from "../../components/add-note-stepper/AddNoteStepper";
 import "./addNoteModal.css";
 
-const TITLE_MAX_LENGTH = 50;
+const TITLE_MAX_LENGTH = 30;
 const DESCRIPTION_MAX_LENGTH = 250;
 const TITLE_MIN_LENGTH = 10;
 const DESCRIPTION_MIN_LENGTH = 50;
@@ -28,21 +28,19 @@ const ALLOWED_FILE_TYPE = [
   "application/pdf",
   "application/msword"
 ];
+const steps = ["Note information", "Upload files", "Publish note"];
+
 const ALLOWED_FILE_TYPE_PRINT = [".doc", ".docx", ".pdf"];
 
 class AddNoteModal extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      steps: [
-        "Note information",
-        "For each ad campaign ",
-        "For each ad campaign "
-      ],
       activeStep: 0,
-      loading: false,
-      university: "",
-      course: "",
+      loadingFileUpload: false,
+      loadingNotePublish: false,
+      universityId: "",
+      courseId: "",
       title: "",
       description: "",
       price: "",
@@ -84,6 +82,8 @@ class AddNoteModal extends React.Component {
   };
 
   handleInputChange = event => {
+    console.log(event.target);
+    console.log(event.target.value);
     this.setState({
       [event.target.name]: event.target.value,
       [event.target.name + "Error"]: false
@@ -124,12 +124,12 @@ class AddNoteModal extends React.Component {
   stepOneNext = () => {
     var verified = true;
 
-    if (this.state.university === "") {
+    if (this.state.universityId === "") {
       verified = false;
       this.setState({ universityError: true });
     }
 
-    if (this.state.course === "") {
+    if (this.state.courseId === "") {
       verified = false;
       this.setState({ courseError: true });
     }
@@ -164,7 +164,7 @@ class AddNoteModal extends React.Component {
 
     // check that at least one file is highlighted as thumbnail
     var highlighted = this.state.files.find(file => {
-      return file.highlight;
+      return file.isNoteThumbnail;
     });
 
     if (!highlighted) {
@@ -182,14 +182,18 @@ class AddNoteModal extends React.Component {
   stepThreeNext = () => {
     // TODO handle any errors
     // TODO pass in user jwt
+    this.setState({
+      loadingFilePublish: true
+    });
     console.log("PUBLISH");
     var note = {
-      university: this.state.university,
-      course: this.state.course,
+      universityId: this.state.universityId,
+      courseId: this.state.courseId,
       title: this.state.title,
       description: this.state.description,
       price: parseFloat(this.state.price),
       files: this.state.files,
+      thumbnail: this.state.files.find(file => file.isNoteThumbnail).thumbnail,
       notaker: {
         _id: "5a4fab9dd41bff1e5c161e85",
         handle: "edancanning",
@@ -202,7 +206,8 @@ class AddNoteModal extends React.Component {
       .then(res => {
         console.log(res.data.notes);
         this.setState({
-          activeStep: this.state.activeStep + 1
+          activeStep: this.state.activeStep + 1,
+          loadingFilePublish: false
         });
         this.props.updateNotes(res.data.notes);
       })
@@ -252,7 +257,7 @@ class AddNoteModal extends React.Component {
     console.log(files);
     if (this.checkFiles(files)) {
       this.setState({
-        loading: true
+        loadingFileUpload: true
       });
       var uploaders = [];
       for (let i = 0; i < files.length; i++) {
@@ -265,7 +270,7 @@ class AddNoteModal extends React.Component {
         .then(files => {
           this.setState({
             files: files.map(file => file.data.file),
-            loading: false
+            loadingFileUpload: false
           });
         })
         .catch(e => {
@@ -292,11 +297,11 @@ class AddNoteModal extends React.Component {
     this.setState({
       files: this.state.files.map(file => {
         if (file.name === name) {
-          newFile = Object.assign({ highlight: true }, file);
+          newFile = Object.assign({ isNoteThumbnail: true }, file);
           return newFile;
-        } else if (file.highlight) {
+        } else if (file.isNoteThumbnail) {
           newFile = Object.assign({}, file);
-          delete newFile.highlight;
+          delete newFile.isNoteThumbnail;
           return newFile;
         }
         return file;
@@ -304,12 +309,30 @@ class AddNoteModal extends React.Component {
     });
   };
 
-  //
-
-  handleNext = () => {
-    this.setState({
-      activeStep: this.state.activeStep + 1
-    });
+  handleClose = () => {
+    if (this.state.activeStep === steps.length) {
+      this.setState({
+        activeStep: 0,
+        loadingFileUpload: false,
+        loadingNotePublish: false,
+        universityId: "",
+        courseId: "",
+        title: "",
+        description: "",
+        price: "",
+        universityError: false,
+        courseError: false,
+        titleError: false,
+        descriptionError: false,
+        priceError: false,
+        maxFilesSnackbar: false,
+        maxFilesSizeSnackbar: false,
+        chooseThumbnailSnackbar: false,
+        illegalFileTypeSnackbar: false,
+        files: []
+      });
+    }
+    this.props.handleModalClose();
   };
 
   handleBack = () => {
@@ -317,13 +340,6 @@ class AddNoteModal extends React.Component {
       activeStep: this.state.activeStep - 1
     });
   };
-
-  handleReset = () => {
-    this.setState({
-      activeStep: 0
-    });
-  };
-  //
 
   render() {
     var fullScreen = false;
@@ -333,14 +349,14 @@ class AddNoteModal extends React.Component {
           className="add-note-modal-dialog"
           fullScreen={fullScreen}
           open={this.props.open}
-          onClose={this.props.handleModalClose}
+          onClose={this.handleClose}
           aria-labelledby="responsive-dialog-title"
         >
           <AppBar className="app-bar">
             <Toolbar>
               <IconButton
                 color="contrast"
-                onClick={this.props.handleModalClose}
+                onClick={this.handleClose}
                 aria-label="Close"
               >
                 <Close />
@@ -353,19 +369,17 @@ class AddNoteModal extends React.Component {
           </DialogTitle>
           <DialogContent className="dialog-content">
             <AddNoteStepper
-              steps={this.state.steps}
+              steps={steps}
               SNACKBAR_DURATION={SNACKBAR_DURATION}
               ALLOWED_FILE_TYPE_PRINT={ALLOWED_FILE_TYPE_PRINT}
               getStep={this.getStep}
-              handleReset={this.handleReset}
               handleBack={this.handleBack}
-              handleNext={this.handleNext}
               activeStep={this.state.activeStep}
               universityError={this.state.universityError}
-              university={this.state.university}
+              universityId={this.state.universityId}
               universities={this.state.universities}
               courseError={this.state.courseError}
-              course={this.state.course}
+              courseId={this.state.courseId}
               courses={this.state.courses}
               titleError={this.state.titleError}
               title={this.state.title}
@@ -380,7 +394,8 @@ class AddNoteModal extends React.Component {
               stepOneNext={this.stepOneNext}
               TITLE_MIN_LENGTH={TITLE_MIN_LENGTH}
               DESCRIPTION_MIN_LENGTH={DESCRIPTION_MIN_LENGTH}
-              loading={this.state.loading}
+              loadingFileUpload={this.state.loadingFileUpload}
+              loadingFilePublish={this.state.loadingFilePublish}
               maxFilesSnackbar={this.state.maxFilesSnackbar}
               maxFilesSizeSnackbar={this.state.maxFilesSizeSnackbar}
               handleFileUpload={this.handleFileUpload}
@@ -394,10 +409,11 @@ class AddNoteModal extends React.Component {
               chooseThumbnailSnackbar={this.state.chooseThumbnailSnackbar}
               illegalFileTypeSnackbar={this.state.illegalFileTypeSnackbar}
               handleFileClear={this.handleFileClear}
+              handleClose={this.handleClose}
             />
           </DialogContent>
           <DialogActions className="dialog-actions">
-            <Button onClick={this.props.handleModalClose} color="primary">
+            <Button onClick={this.handleClose} color="primary">
               Close
             </Button>
           </DialogActions>

@@ -44,6 +44,7 @@ $viewOffsetMarginHorizontalMobile: 1.5rem;
 @mixin h3 {
   @include header;
   font-size: 1.1rem;
+  font-weight: 500;
 }
 
 @mixin p {

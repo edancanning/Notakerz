@@ -19,6 +19,8 @@ class Notes extends React.Component {
       .get("/notes")
       .then(res => {
         console.log("GET /notes");
+        console.log(res.data.notes);
+        console.log(typeof res.data.notes);
         this.setState({ notes: res.data.notes });
       })
       .catch(e => {
@@ -51,6 +53,7 @@ class Notes extends React.Component {
   };
 
   updateNotes = notes => {
+    console.log("Update notes", notes);
     this.setState({ notes });
   };
 

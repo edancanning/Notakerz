@@ -1,7 +1,7 @@
 import React from "react";
 import { Paper, Avatar, ButtonBase } from "material-ui/";
 
-import { timeSince } from "../../utils/utils";
+import { timeSince, courseToTitle } from "../../utils/utils";
 import "./note.css";
 
 var Note = props => {
@@ -24,11 +24,18 @@ var Note = props => {
           <div
             className="thumbnail"
             style={{
-              backgroundImage: `url(${props.files[0].thumbnailUrl})`
+              backgroundImage: `url(${props.thumbnail})`
             }}
           />
           <div className="footer">
-            <p className="course">{props.course}</p>
+            <p className="course">
+              {courseToTitle(
+                props.course.code,
+                props.course.semester,
+                props.course.year,
+                props.course.professor
+              )}
+            </p>
             <p className="title">{props.title}</p>
           </div>
         </ButtonBase>
