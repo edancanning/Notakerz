@@ -2,8 +2,10 @@ import React from "react";
 import { Route, BrowserRouter } from "react-router-dom";
 import Menus from "./containers/menus/Menus";
 import Notes from "./containers/notes/Notes";
+import NotePage from "./containers/note-page/NotePage";
 import { MuiThemeProvider, createMuiTheme } from "material-ui";
 import { primary, accent } from "./utils/colors";
+import "./utils/reset.css";
 import "./App.css";
 import "typeface-roboto";
 
