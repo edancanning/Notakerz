@@ -11,6 +11,7 @@
   transition: left 0.3s ease-in-out;
 
   .logo {
+    cursor: pointer;
     height: $headerHeight;
     border-bottom: 0.1rem solid #e5e5e5;
     text-align: center;

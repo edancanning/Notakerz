@@ -10,6 +10,7 @@ import {
   BookOpenPageVariant,
   Star
 } from "mdi-material-ui";
+import { Link } from "react-router-dom";
 import logo from "../../img/logo.png";
 import gabbie from "../../img/gabbie.png";
 import "./sidebar.css";
@@ -18,7 +19,9 @@ var Sidebar = props => (
   <Paper>
     <div className="sidebar-component" style={{ left: props.sideBarLeft }}>
       <div className="logo">
-        <img src={logo} alt="Notakerz logo" />
+        <Link to="/">
+          <img src={logo} alt="Notakerz logo" />
+        </Link>
       </div>
       <div className="profile">
         <div className="shift">
