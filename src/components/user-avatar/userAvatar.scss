@@ -1,0 +1,26 @@
+@import "../../utils/variables";
+.user-avatar-component {
+  .header {
+    @include flexbox-vertical-center;
+    .avatar {
+      background-color: $accent-light;
+    }
+    .notaker-container {
+      @include flex(1);
+      vertical-align: middle;
+      margin-left: 0.5rem;
+
+      .notaker {
+        @include p;
+      }
+      .created-at {
+        @include p-small;
+      }
+    }
+    .price-container {
+      .price {
+        @include p;
+      }
+    }
+  }
+}

@@ -4,13 +4,19 @@ import { FileWord, FilePdf, FilePowerpoint } from "mdi-material-ui";
 
 import "./thumbnailCard.css";
 
-function fileIconHandler(type) {
+function fileIconHandler(type, iconWidth) {
+  var attr = {
+    className: "file-icon",
+    style: {
+      width: `${iconWidth}rem`
+    }
+  };
   if (type === "pdf") {
-    return <FilePdf className="file-icon" />;
+    return <FilePdf {...attr} />;
   } else if (type === "docx" || type === "doc") {
-    return <FileWord className="file-icon" />;
+    return <FileWord {...attr} />;
   } else if (type === "ppt") {
-    return <FilePowerpoint className="file-icon" />;
+    return <FilePowerpoint {...attr} />;
   }
 }
 
@@ -27,13 +33,22 @@ var ThumbnailCard = props => (
         <div
           className="thumbnail"
           style={{
-            backgroundImage: `url(${props.thumbnail})`
+            backgroundImage: `url(${props.thumbnail})`,
+            height: `${props.height}rem`
           }}
         />
       </div>
-      <div className={props.isNoteThumbnail ? "highlight footer" : "footer"}>
-        {fileIconHandler("pdf")}
-        <p className="file-name">{props.name}</p>
+      <div
+        className={props.isNoteThumbnail ? "highlight footer" : "footer"}
+        style={{
+          paddingTop: `${props.footerPadding}rem`,
+          paddingBottom: `${props.footerPadding}rem`
+        }}
+      >
+        {fileIconHandler("pdf", props.iconWidth)}
+        <p className="file-name" style={{ fontSize: `${props.fontSize}rem` }}>
+          {props.name}
+        </p>
       </div>
     </ButtonBase>
   </Paper>

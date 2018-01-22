@@ -18,26 +18,19 @@
       font-family: "Roboto", "Helvetica", "Arial", sans-serif;
       color: #535353;
       font-weight: normal;
-      line-height: 1.2;
-      font-size: 2rem; }
+      line-height: 1.3;
+      font-size: 1.8rem; }
     .notes-container .header .title h2 {
       font-family: "Roboto", "Helvetica", "Arial", sans-serif;
       color: #535353;
       font-weight: normal;
-      line-height: 1.2;
-      font-size: 1.5rem; }
+      line-height: 1.3;
+      font-size: 1.4rem; }
   .notes-container .header .add-note {
-    background-color: #78909c;
-    color: #ffffff;
     right: 2rem;
     bottom: 2rem;
     z-index: 3;
-    width: 3.75rem;
-    position: fixed;
-    height: 3.75rem; }
-    .notes-container .header .add-note svg {
-      width: 1.75rem;
-      height: 1.75rem; }
+    position: fixed; }
 
 .notes-container .grid-container {
   margin-top: 1rem; }

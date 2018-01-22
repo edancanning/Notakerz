@@ -1,7 +1,7 @@
 import React from "react";
 import { Paper, Avatar, ButtonBase } from "material-ui/";
 import { Link } from "react-router-dom";
-
+import UserAvatar from "../user-avatar/UserAvatar";
 import { timeSince, courseToTitle } from "../../utils/utils";
 import "./note.css";
 
@@ -14,17 +14,13 @@ var Note = props => {
       >
         <Paper>
           <ButtonBase focusRipple className="ripple">
-            <div className="header">
-              <Avatar className="avatar">
-                {props.notaker.handle.charAt(0).toUpperCase()}
-              </Avatar>
-              <div className="notaker-container">
-                <p className="notaker">{props.notaker.handle}</p>
-                <p className="created-at">{timeSince(props.createdAt)}</p>
-              </div>
-              <div className="price-container">
-                <p className="price">{`$${props.price}`}</p>
-              </div>
+            <div className="user-avatar">
+              <UserAvatar
+                className="user-avatar"
+                notakerHandle={props.notaker.handle}
+                createdAt={props.createdAt}
+                price={props.price}
+              />
             </div>
             <div
               className="thumbnail"

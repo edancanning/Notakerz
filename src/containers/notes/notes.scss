@@ -14,18 +14,7 @@
       }
     }
     .add-note {
-      background-color: $accent;
-      color: #ffffff;
-      right: 2rem;
-      bottom: 2rem;
-      z-index: 3;
-      width: 3.75rem;
-      position: fixed;
-      height: 3.75rem;
-      svg {
-        width: 1.75rem;
-        height: 1.75rem;
-      }
+      @include action-button-mobile;
     }
   }
   .grid-container {
@@ -44,9 +33,7 @@
   @media (min-width: 960px) {
     .header {
       .add-note {
-        position: relative;
-        right: auto;
-        bottom: auto;
+        @include action-button;
       }
     }
   }

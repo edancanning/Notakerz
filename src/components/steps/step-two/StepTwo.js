@@ -31,6 +31,10 @@ var StepTwo = props => {
               <Grid key={file.name} item xs={12} sm={6} lg={4}>
                 <ThumbnailCard
                   {...file}
+                  height="10"
+                  iconWidth="1.3"
+                  fontSize="0.8"
+                  footerPadding="0.25"
                   thumbnailClickHandler={props.thumbnailClickHandler}
                 />
               </Grid>

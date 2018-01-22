@@ -1,71 +1,68 @@
 import React from "react";
+import { LinearProgress } from "material-ui";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import "./menus.css";
 
 class Menus extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            auth: true,
-            anchorEl: null,
-            myCoursesOpen: false,
-            sidebarOpen: false
-        };
-        this.SIDE_BAR_WIDTH = "16rem";
-    }
-
-    toggleSidebar = event => {
-        this.setState({
-            sidebarOpen: !this.state.sidebarOpen
-        });
+  constructor() {
+    super();
+    this.state = {
+      auth: true,
+      anchorEl: null,
+      myCoursesOpen: false,
+      sidebarOpen: false
     };
+    this.SIDE_BAR_WIDTH = "16rem";
+  }
 
-    toggleMyCourses = () => {
-        this.setState({ myCoursesOpen: !this.state.myCoursesOpen });
-    };
+  toggleSidebar = event => {
+    this.setState({
+      sidebarOpen: !this.state.sidebarOpen
+    });
+  };
 
-    // example boilerplate
+  toggleMyCourses = () => {
+    this.setState({ myCoursesOpen: !this.state.myCoursesOpen });
+  };
 
-    handleChange = (event, checked) => {
-        this.setState({ auth: checked });
-    };
+  // example boilerplate
 
-    handleMenu = event => {
-        this.setState({ anchorEl: event.currentTarget });
-    };
+  handleChange = (event, checked) => {
+    this.setState({ auth: checked });
+  };
 
-    handleClose = () => {
-        this.setState({ anchorEl: null });
-    };
+  handleMenu = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
 
-    render() {
-        return (
-            <div className="menus-container">
-                <div
-                    className={
-                        this.state.sidebarOpen ? "blacken" : "blacken hide"
-                    }
-                    onClick={this.toggleSidebar}
-                />
-                <Sidebar
-                    toggleMyCourses={this.toggleMyCourses}
-                    sideBarLeft={
-                        this.state.sidebarOpen ? "0" : "-" + this.SIDE_BAR_WIDTH
-                    }
-                    myCoursesOpen={this.state.myCoursesOpen}
-                />
-                <Header
-                    toggleSidebar={this.toggleSidebar}
-                    handleClose={this.handleClose}
-                    handleMenu={this.handleMenu}
-                    handleChange={this.handleChange}
-                    auth={this.state.auth}
-                    anchorEl={this.state.anchorEl}
-                />
-            </div>
-        );
-    }
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
+  render() {
+    return (
+      <div className="menus-container">
+        <div
+          className={this.state.sidebarOpen ? "blacken" : "blacken hide"}
+          onClick={this.toggleSidebar}
+        />
+        <Sidebar
+          toggleMyCourses={this.toggleMyCourses}
+          sideBarLeft={this.state.sidebarOpen ? "0" : "-" + this.SIDE_BAR_WIDTH}
+          myCoursesOpen={this.state.myCoursesOpen}
+        />
+        <Header
+          toggleSidebar={this.toggleSidebar}
+          handleClose={this.handleClose}
+          handleMenu={this.handleMenu}
+          handleChange={this.handleChange}
+          auth={this.state.auth}
+          anchorEl={this.state.anchorEl}
+        />
+      </div>
+    );
+  }
 }
 
 export default Menus;

@@ -14,7 +14,7 @@ class Notes extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     axios
       .get("/notes")
       .then(res => {
@@ -32,7 +32,10 @@ class Notes extends React.Component {
     if (this.state.notes.length > 0) {
       return this.state.notes.map(element => (
         <Grid key={element._id} item xs={12} sm={6} lg={4}>
-          <Note {...element} />
+          <Note
+            {...element}
+            startLinearProgress={this.props.startLinearProgress}
+          />
         </Grid>
       ));
     } else {
@@ -63,12 +66,13 @@ class Notes extends React.Component {
         <div className="header">
           <div className="title">
             <h1>University of Florida</h1>
-            <h2>Latest notes</h2>
+            <h2>Latest Notes</h2>
           </div>
           <Button
             className="add-note"
             onClick={this.handleModalOpen}
             fab
+            color="accent"
             aria-label="create a note"
           >
             <LeadPencil />

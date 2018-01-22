@@ -4,9 +4,10 @@ $primary-light: #17b7ff;
 $accent: #78909c;
 $accent-light: #abbbc5;
 $font: "Roboto", "Helvetica", "Arial", sans-serif;
-$icon-color: #8c8b8b;
+$icon-color: #a3a3a3;
 $font-color: #3d3d3d;
 $danger: #ff0000;
+$background-color: #fafafa;
 
 // sidebar
 $sidebarWidth: 16rem;
@@ -28,17 +29,17 @@ $viewOffsetMarginHorizontalMobile: 1.5rem;
   @include typography;
   color: #535353;
   font-weight: normal;
-  line-height: 1.2;
+  line-height: 1.3;
 }
 
 @mixin h1 {
   @include header;
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 @mixin h2 {
   @include header;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 @mixin h3 {
@@ -50,7 +51,7 @@ $viewOffsetMarginHorizontalMobile: 1.5rem;
 @mixin p {
   @include typography;
   line-height: 1.3;
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: $font-color;
 }
 
@@ -101,4 +102,26 @@ $viewOffsetMarginHorizontalMobile: 1.5rem;
   -ms-flex-order: $val;
   -webkit-order: $val;
   order: $val;
+}
+
+@mixin center-vertical-horizontal($width, $height) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: $width;
+  height: $height;
+  margin: (-$height/2) 0 0 (-$width/2);
+}
+
+@mixin action-button-mobile {
+  right: 2rem;
+  bottom: 2rem;
+  z-index: 3;
+  position: fixed;
+}
+
+@mixin action-button {
+  position: relative;
+  right: auto;
+  bottom: auto;
 }
