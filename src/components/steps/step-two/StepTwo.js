@@ -2,7 +2,7 @@ import React from "react";
 import { Button, CircularProgress, Snackbar, Slide, Grid } from "material-ui";
 import { CloudUpload } from "mdi-material-ui";
 
-import ThumbnailCard from "../../thumbnail-card/ThumbnailCard";
+import NoteThumbnail from "../../note-thumbnail/NoteThumbnail";
 
 import "./stepTwo.css";
 
@@ -29,7 +29,8 @@ var StepTwo = props => {
           <Grid className="file-thumbnail-cards" container spacing={24}>
             {props.files.map(file => (
               <Grid key={file.name} item xs={12} sm={6} lg={4}>
-                <ThumbnailCard
+                <NoteThumbnail
+                  highlightThumbnail
                   {...file}
                   height="10"
                   iconWidth="1.3"

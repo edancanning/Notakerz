@@ -3,7 +3,7 @@ import axios from "axios";
 import { CircularProgress, Button, Paper, Grid } from "material-ui";
 import { Cart } from "mdi-material-ui";
 import UserAvatar from "../../components/user-avatar/UserAvatar";
-import ThumbnailCard from "../../components/thumbnail-card/ThumbnailCard";
+import NoteThumbnail from "../../components/note-thumbnail/NoteThumbnail";
 import { courseToTitle } from "../../utils/utils";
 
 import "./notePage.css";
@@ -76,6 +76,7 @@ class NotePage extends React.Component {
               <Cart />
             </Button>
           </div>
+          <h3>Description</h3>
           <Paper className="description-container">
             <UserAvatar
               notakerHandle={this.state.notakerHandle}
@@ -87,11 +88,11 @@ class NotePage extends React.Component {
             </div>
           </Paper>
           <div className="files">
-            <h2>Files</h2>
+            <h3>Files</h3>
             <Grid className="file-thumbnail-cards" container spacing={24}>
               {this.state.files.map(file => (
                 <Grid key={file.name} item xs={12} sm={6} lg={4}>
-                  <ThumbnailCard
+                  <NoteThumbnail
                     {...file}
                     height="18"
                     iconWidth="1.5"

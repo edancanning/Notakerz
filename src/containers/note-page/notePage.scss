@@ -22,18 +22,25 @@
     }
   }
 
-  .description-container {
+  h3 {
     margin-top: 1.5rem;
+    @include h3;
+  }
+  .description-container {
+    margin-top: 0.5rem;
     padding: 1rem;
     .description {
       margin-top: 0.75rem;
-      @include p;
+      p {
+        @include p;
+        word-wrap: break-word;
+      }
     }
   }
 
   .files {
-    h2 {
-      @include h2;
+    margin-bottom: 2rem;
+    h3 {
       margin-top: 2rem;
       margin-bottom: 0.5rem;
     }

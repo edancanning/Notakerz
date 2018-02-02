@@ -2,7 +2,7 @@ import React from "react";
 import { Paper, ButtonBase } from "material-ui";
 import { FileWord, FilePdf, FilePowerpoint } from "mdi-material-ui";
 
-import "./thumbnailCard.css";
+import "./noteThumbnail.css";
 
 function fileIconHandler(type, iconWidth) {
   var attr = {
@@ -20,7 +20,7 @@ function fileIconHandler(type, iconWidth) {
   }
 }
 
-var ThumbnailCard = props => (
+var NoteThumbnail = props => (
   <Paper className="thumbnail-card-component">
     <ButtonBase
       focusRipple
@@ -39,7 +39,11 @@ var ThumbnailCard = props => (
         />
       </div>
       <div
-        className={props.isNoteThumbnail ? "highlight footer" : "footer"}
+        className={
+          props.isNoteThumbnail && props.highlightThumbnail
+            ? "highlight footer"
+            : "footer"
+        }
         style={{
           paddingTop: `${props.footerPadding}rem`,
           paddingBottom: `${props.footerPadding}rem`
@@ -54,4 +58,4 @@ var ThumbnailCard = props => (
   </Paper>
 );
 
-export default ThumbnailCard;
+export default NoteThumbnail;
