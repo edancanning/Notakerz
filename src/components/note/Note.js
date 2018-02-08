@@ -1,17 +1,14 @@
 import React from "react";
-import { Paper, Avatar, ButtonBase } from "material-ui/";
+import { Paper, ButtonBase } from "material-ui/";
 import { Link } from "react-router-dom";
 import UserAvatar from "../user-avatar/UserAvatar";
-import { timeSince, courseToTitle } from "../../utils/utils";
+import { courseToTitle } from "../../utils/utils";
 import "./note.css";
 
 var Note = props => {
   return (
     <div className="note-component">
-      <Link
-        to={`notes/${props._id}`}
-        style={{ textDecoration: "none", color: "none" }}
-      >
+      <Link to={`notes/${props._id}`} style={{ textDecoration: "none" }}>
         <Paper>
           <ButtonBase focusRipple className="ripple">
             <div className="user-avatar">

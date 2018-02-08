@@ -30,4 +30,8 @@ function timeSince(timeStamp) {
 function courseToTitle(code, semester, year, professor) {
   return `${code} ${semester} ${String(year).substr(2)} (${professor})`;
 }
-export { timeSince, courseToTitle };
+
+function trimFileName(name) {
+  return name.slice(0, name.lastIndexOf("."));
+}
+export { timeSince, courseToTitle, trimFileName };

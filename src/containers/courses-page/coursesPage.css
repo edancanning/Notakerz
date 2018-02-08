@@ -1,0 +1,5 @@
+.courses-page-container .grid-container .loader-container {
+  text-align: center;
+  margin-top: 20vh; }
+  .courses-page-container .grid-container .loader-container .loader {
+    color: #03a9f4; }

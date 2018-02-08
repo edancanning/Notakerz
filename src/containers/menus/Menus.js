@@ -1,5 +1,4 @@
 import React from "react";
-import { LinearProgress } from "material-ui";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import "./menus.css";

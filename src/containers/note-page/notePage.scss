@@ -6,24 +6,8 @@
   .loader {
     @include center-vertical-horizontal(75px, 75px);
   }
-  .header {
-    @include flexbox-vertical-center;
-    .title {
-      @include flex(1);
-      h1 {
-        @include h1;
-      }
-      h2 {
-        @include h2;
-      }
-    }
-    .action-button {
-      @include action-button-mobile;
-    }
-  }
 
   h3 {
-    margin-top: 1.5rem;
     @include h3;
   }
   .description-container {
@@ -43,14 +27,6 @@
     h3 {
       margin-top: 2rem;
       margin-bottom: 0.5rem;
-    }
-  }
-
-  @media (min-width: 960px) {
-    .header {
-      .action-button {
-        @include action-button;
-      }
     }
   }
 }

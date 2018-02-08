@@ -42,6 +42,10 @@
       cursor: pointer;
       margin: 1rem 0;
       color: #03a9f4; }
+  .sidebar-component .nav .link {
+    text-decoration: none; }
+    .sidebar-component .nav .link .button {
+      color: buttontext; }
   .sidebar-component .nav .indent {
     padding-left: 1rem; }
   .sidebar-component .nav svg {

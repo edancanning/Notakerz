@@ -4,6 +4,8 @@ import { CircularProgress, Button, Paper, Grid } from "material-ui";
 import { Cart } from "mdi-material-ui";
 import UserAvatar from "../../components/user-avatar/UserAvatar";
 import NoteThumbnail from "../../components/note-thumbnail/NoteThumbnail";
+import NoteThumbnailModal from "../../components/note-thumbnail/note-thumbnail-modal/NoteThumbnailModal";
+import PageHeader from "../../components/page-header/PageHeader";
 import { courseToTitle } from "../../utils/utils";
 
 import "./notePage.css";
@@ -19,14 +21,18 @@ class NotePage extends React.Component {
       notakerHandle: "",
       price: "",
       title: "",
-      files: []
+      files: [],
+      thumbnailModalOpen: false,
+      thumbnailFileName: "",
+      thumbnailFilePages: 0,
+      thumbnailFileType: ""
     };
   }
 
   componentWillMount() {
     console.log(`GET ${this.props.location.pathname}`);
     axios
-      .get("/notes/1")
+      .get(this.props.location.pathname)
       .then(res => {
         console.log(res.data.note);
         var note = res.data.note;
@@ -49,6 +55,22 @@ class NotePage extends React.Component {
       .catch(e => console.log(e));
   }
 
+  thumbnailModalHandleOpen = (fileName, pages, fileType) => {
+    console.log(pages);
+    this.setState({
+      thumbnailModalOpen: true,
+      thumbnailFileName: fileName,
+      thumbnailFilePages: pages,
+      thumbnailFileType: fileType
+    });
+  };
+
+  thumbnailModalHandleClose = () => {
+    this.setState({
+      thumbnailModalOpen: false
+    });
+  };
+
   render() {
     // check if files are loaded (should all load at the same time anyway so it doesn't matter)
     if (!this.state.loaded) {
@@ -61,21 +83,13 @@ class NotePage extends React.Component {
     } else {
       return (
         <div className="note-page-container">
-          <div className="header">
-            <div className="title">
-              <h1>{this.state.title}</h1>
-              <h2>{this.state.courseName}</h2>
-            </div>
-            <Button
-              className="action-button"
-              onClick={this.handleModalOpen}
-              fab
-              aria-label="create a note"
-              color="accent"
-            >
-              <Cart />
-            </Button>
-          </div>
+          <PageHeader
+            title={this.state.title}
+            subTitle={this.state.courseName}
+            onClick={this.handleModalOpen}
+          >
+            <Cart />
+          </PageHeader>
           <h3>Description</h3>
           <Paper className="description-container">
             <UserAvatar
@@ -89,6 +103,14 @@ class NotePage extends React.Component {
           </Paper>
           <div className="files">
             <h3>Files</h3>
+            <NoteThumbnailModal
+              open={this.state.thumbnailModalOpen}
+              handleOpen={this.thumbnailModalHandleOpen}
+              handleClose={this.thumbnailModalHandleClose}
+              title={this.state.thumbnailFileName}
+              fileType={this.state.thumbnailFileType}
+              pages={this.state.thumbnailFilePages}
+            />
             <Grid className="file-thumbnail-cards" container spacing={24}>
               {this.state.files.map(file => (
                 <Grid key={file.name} item xs={12} sm={6} lg={4}>
@@ -99,6 +121,7 @@ class NotePage extends React.Component {
                     fontSize="0.9"
                     footerPadding="0.6"
                     thumbnailClickHandler={() => {}}
+                    onClick={this.thumbnailModalHandleOpen}
                   />
                 </Grid>
               ))}

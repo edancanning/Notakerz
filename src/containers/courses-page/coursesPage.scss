@@ -1,0 +1,14 @@
+@import "../../utils/variables";
+
+.courses-page-container {
+  .grid-container {
+    .loader-container {
+      text-align: center;
+      margin-top: 20vh;
+
+      .loader {
+        color: $primary;
+      }
+    }
+  }
+}

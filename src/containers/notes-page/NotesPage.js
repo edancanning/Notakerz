@@ -4,8 +4,9 @@ import { LeadPencil } from "mdi-material-ui";
 import axios from "axios";
 import AddNoteModal from "../add-note-modal/AddNoteModal";
 import Note from "../../components/note/Note";
-import "./notes.css";
-class Notes extends React.Component {
+import PageHeader from "../../components/page-header/PageHeader";
+import "./notesPage.css";
+class NotesPage extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -32,10 +33,7 @@ class Notes extends React.Component {
     if (this.state.notes.length > 0) {
       return this.state.notes.map(element => (
         <Grid key={element._id} item xs={12} sm={6} lg={4}>
-          <Note
-            {...element}
-            startLinearProgress={this.props.startLinearProgress}
-          />
+          <Note {...element} />
         </Grid>
       ));
     } else {
@@ -63,21 +61,14 @@ class Notes extends React.Component {
   render() {
     return (
       <div className="notes-container">
-        <div className="header">
-          <div className="title">
-            <h1>University of Florida</h1>
-            <h2>Latest Notes</h2>
-          </div>
-          <Button
-            className="add-note"
-            onClick={this.handleModalOpen}
-            fab
-            color="accent"
-            aria-label="create a note"
-          >
-            <LeadPencil />
-          </Button>
-        </div>
+        <PageHeader
+          title={"University of Florida"}
+          subTitle={"Latest Notes"}
+          onClick={this.handleModalOpen}
+        >
+          <LeadPencil />
+        </PageHeader>
+
         <Grid container className="grid-container" spacing={24}>
           {this.renderNotes()}
         </Grid>
@@ -91,4 +82,4 @@ class Notes extends React.Component {
   }
 }
 
-export default Notes;
+export default NotesPage;

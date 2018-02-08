@@ -36,7 +36,7 @@ var StepTwo = props => {
                   iconWidth="1.3"
                   fontSize="0.8"
                   footerPadding="0.25"
-                  thumbnailClickHandler={props.thumbnailClickHandler}
+                  onClick={props.thumbnailClickHandler}
                 />
               </Grid>
             ))}

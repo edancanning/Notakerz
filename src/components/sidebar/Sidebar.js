@@ -41,18 +41,22 @@ var Sidebar = props => (
       </div>
       <div className="nav">
         <List>
-          <ListItem button>
-            <ListItemIcon>
-              <FileDocument />
-            </ListItemIcon>
-            <ListItemText inset primary="Notes" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <BookOpenPageVariant />
-            </ListItemIcon>
-            <ListItemText inset primary="Courses" />
-          </ListItem>
+          <Link className="link" to="/">
+            <ListItem className="button" button>
+              <ListItemIcon>
+                <FileDocument />
+              </ListItemIcon>
+              <ListItemText inset primary="Notes" />
+            </ListItem>
+          </Link>
+          <Link className="link" to="/courses">
+            <ListItem className="button" button>
+              <ListItemIcon>
+                <BookOpenPageVariant />
+              </ListItemIcon>
+              <ListItemText inset primary="Courses" />
+            </ListItem>
+          </Link>
           <ListItem button onClick={props.toggleMyCourses}>
             <ListItemIcon>
               <Star />

@@ -26,7 +26,7 @@ var NoteThumbnail = props => (
       focusRipple
       className="ripple"
       onClick={() => {
-        props.thumbnailClickHandler(props.name);
+        props.onClick(props.name, props.pages, props.fileType);
       }}
     >
       <div className="body">

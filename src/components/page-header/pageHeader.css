@@ -1,4 +1,5 @@
-.notes-container .header {
+.page-header-components {
+  margin-bottom: 1.5rem;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -8,40 +9,31 @@
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center; }
-  .notes-container .header .title {
+  .page-header-components .title {
     -webkit-box-flex: 1;
     -moz-box-flex: 1;
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1; }
-    .notes-container .header .title h1 {
+    .page-header-components .title h1 {
       font-family: "Roboto", "Helvetica", "Arial", sans-serif;
       color: #535353;
       font-weight: normal;
       line-height: 1.3;
       font-size: 1.8rem; }
-    .notes-container .header .title h2 {
+    .page-header-components .title h2 {
       font-family: "Roboto", "Helvetica", "Arial", sans-serif;
       color: #535353;
       font-weight: normal;
       line-height: 1.3;
       font-size: 1.4rem; }
-  .notes-container .header .add-note {
+  .page-header-components .action-button {
     right: 2rem;
     bottom: 2rem;
     z-index: 3;
     position: fixed; }
-
-.notes-container .grid-container {
-  margin-top: 1rem; }
-  .notes-container .grid-container .loader-container {
-    text-align: center;
-    margin-top: 20vh; }
-    .notes-container .grid-container .loader-container .loader {
-      color: #03a9f4; }
-
-@media (min-width: 960px) {
-  .notes-container .header .add-note {
-    position: relative;
-    right: auto;
-    bottom: auto; } }
+  @media (min-width: 960px) {
+    .page-header-components .action-button {
+      position: relative;
+      right: auto;
+      bottom: auto; } }
