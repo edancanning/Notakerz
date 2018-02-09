@@ -1,13 +1,19 @@
 @import "../../utils/variables";
 .course-component {
-  .header {
-    padding: 1rem;
-    margin-bottom: 8rem;
-    .code {
-      @include p;
-    }
-    .name {
-      @include p-light;
+  .link {
+    text-decoration: none;
+    .ripple {
+      @include rippleFix;
+      .header {
+        padding: 1rem;
+        margin-bottom: 10rem;
+        .code {
+          @include p;
+        }
+        .name {
+          @include p-light;
+        }
+      }
     }
   }
 }

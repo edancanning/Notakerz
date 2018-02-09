@@ -1,11 +1,12 @@
 import React from "react";
 import axios from "axios";
-import { CircularProgress, Button, Paper, Grid } from "material-ui";
+import { CircularProgress, Paper } from "material-ui";
 import { Cart } from "mdi-material-ui";
 import UserAvatar from "../../components/user-avatar/UserAvatar";
 import NoteThumbnail from "../../components/note-thumbnail/NoteThumbnail";
 import NoteThumbnailModal from "../../components/note-thumbnail/note-thumbnail-modal/NoteThumbnailModal";
 import PageHeader from "../../components/page-header/PageHeader";
+import MyGrid from "../../components/my-grid/MyGrid";
 import { courseToTitle } from "../../utils/utils";
 
 import "./notePage.css";
@@ -111,21 +112,19 @@ class NotePage extends React.Component {
               fileType={this.state.thumbnailFileType}
               pages={this.state.thumbnailFilePages}
             />
-            <Grid className="file-thumbnail-cards" container spacing={24}>
-              {this.state.files.map(file => (
-                <Grid key={file.name} item xs={12} sm={6} lg={4}>
-                  <NoteThumbnail
-                    {...file}
-                    height="18"
-                    iconWidth="1.5"
-                    fontSize="0.9"
-                    footerPadding="0.6"
-                    thumbnailClickHandler={() => {}}
-                    onClick={this.thumbnailModalHandleOpen}
-                  />
-                </Grid>
-              ))}
-            </Grid>
+            <MyGrid
+              elements={this.state.files}
+              elementKey="name"
+              component={NoteThumbnail}
+              componentProps={{
+                height: "18",
+                iconWidth: "1.5",
+                fontSize: "0.9",
+                footerPadding: "0.6",
+                thumbnailClickHandler: () => {},
+                onClick: this.thumbnailModalHandleOpen
+              }}
+            />
           </div>
         </div>
       );

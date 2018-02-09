@@ -1,0 +1,5 @@
+.grid-component .loader-container {
+  text-align: center;
+  margin-top: 20vh; }
+  .grid-component .loader-container .loader {
+    color: #03a9f4; }

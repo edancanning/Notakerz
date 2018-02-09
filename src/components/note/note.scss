@@ -4,11 +4,7 @@
   cursor: pointer;
 
   .ripple {
-    width: 100%;
-    text-align: left;
-    padding: 0;
-    display: block;
-    color: buttontext;
+    @include rippleFix;
 
     .user-avatar {
       padding: 0.75rem;

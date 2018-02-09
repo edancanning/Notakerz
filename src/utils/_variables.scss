@@ -125,3 +125,11 @@ $viewOffsetMarginHorizontalMobile: 1.5rem;
   right: auto;
   bottom: auto;
 }
+
+@mixin rippleFix {
+  width: 100%;
+  text-align: left;
+  padding: 0;
+  display: block;
+  color: $font-color;
+}

@@ -1,8 +1,8 @@
 import React from "react";
 import { Plus } from "mdi-material-ui";
-import { Grid, CircularProgress } from "material-ui";
 import axios from "axios";
 import Course from "../../components/course/Course";
+import MyGrid from "../../components/my-grid/MyGrid";
 
 import PageHeader from "../../components/page-header/PageHeader";
 
@@ -30,21 +30,6 @@ class CoursesPage extends React.Component {
       });
   }
 
-  renderCourses = () => {
-    if (this.state.courses.length > 0) {
-      return this.state.courses.map(course => (
-        <Grid key={course._id} item xs={12} sm={6} lg={4}>
-          <Course {...course} />
-        </Grid>
-      ));
-    } else {
-      return (
-        <Grid item className="loader-container" xs={12}>
-          <CircularProgress className="loader" size={75} />
-        </Grid>
-      );
-    }
-  };
   render() {
     return (
       <div className="courses-page-container">
@@ -55,9 +40,11 @@ class CoursesPage extends React.Component {
         >
           <Plus />
         </PageHeader>
-        <Grid container className="grid-container" spacing={24}>
-          {this.renderCourses()}
-        </Grid>
+        <MyGrid
+          elements={this.state.courses}
+          elementKey="_id"
+          component={Course}
+        />
       </div>
     );
   }

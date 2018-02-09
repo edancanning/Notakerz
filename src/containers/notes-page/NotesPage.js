@@ -1,10 +1,10 @@
 import React from "react";
-import { Grid, CircularProgress, Button } from "material-ui/";
 import { LeadPencil } from "mdi-material-ui";
 import axios from "axios";
 import AddNoteModal from "../add-note-modal/AddNoteModal";
 import Note from "../../components/note/Note";
 import PageHeader from "../../components/page-header/PageHeader";
+import MyGrid from "../../components/my-grid/MyGrid";
 import "./notesPage.css";
 class NotesPage extends React.Component {
   constructor() {
@@ -28,22 +28,6 @@ class NotesPage extends React.Component {
         console.log(e);
       });
   }
-
-  renderNotes = () => {
-    if (this.state.notes.length > 0) {
-      return this.state.notes.map(element => (
-        <Grid key={element._id} item xs={12} sm={6} lg={4}>
-          <Note {...element} />
-        </Grid>
-      ));
-    } else {
-      return (
-        <Grid item className="loader-container" xs={12}>
-          <CircularProgress className="loader" size={75} />
-        </Grid>
-      );
-    }
-  };
 
   handleModalOpen = () => {
     this.setState({ modalOpen: true });
@@ -69,9 +53,7 @@ class NotesPage extends React.Component {
           <LeadPencil />
         </PageHeader>
 
-        <Grid container className="grid-container" spacing={24}>
-          {this.renderNotes()}
-        </Grid>
+        <MyGrid elements={this.state.notes} elementKey="_id" component={Note} />
         <AddNoteModal
           open={this.state.modalOpen}
           handleModalClose={this.handleModalClose}
