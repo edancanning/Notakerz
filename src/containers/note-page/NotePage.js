@@ -88,9 +88,8 @@ class NotePage extends React.Component {
             title={this.state.title}
             subTitle={this.state.courseName}
             onClick={this.handleModalOpen}
-          >
-            <Cart />
-          </PageHeader>
+            icon={Cart}
+          />
           <h3>Description</h3>
           <Paper className="description-container">
             <UserAvatar

@@ -37,9 +37,8 @@ class CoursesPage extends React.Component {
           title="University of Florida"
           subTitle="Courses"
           onClick={() => {}}
-        >
-          <Plus />
-        </PageHeader>
+          icon={Plus}
+        />
         <MyGrid
           elements={this.state.courses}
           elementKey="_id"

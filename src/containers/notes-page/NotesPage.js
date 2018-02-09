@@ -49,9 +49,8 @@ class NotesPage extends React.Component {
           title={"University of Florida"}
           subTitle={"Latest Notes"}
           onClick={this.handleModalOpen}
-        >
-          <LeadPencil />
-        </PageHeader>
+          icon={LeadPencil}
+        />
 
         <MyGrid elements={this.state.notes} elementKey="_id" component={Note} />
         <AddNoteModal

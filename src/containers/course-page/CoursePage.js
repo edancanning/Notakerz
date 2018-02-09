@@ -1,5 +1,6 @@
 import React from "react";
 import PageHeader from "../../components/page-header/PageHeader";
+import { LeadPencil } from "mdi-material-ui";
 import axios from "axios";
 
 import "./coursePage.css";
@@ -28,7 +29,11 @@ class CoursePage extends React.Component {
   render() {
     return (
       <div className="course-page-container">
-        <PageHeader title="University of Florida" subTitle="" />
+        <PageHeader
+          title="University of Florida"
+          subTitle=""
+          icon={LeadPencil}
+        />
       </div>
     );
   }
