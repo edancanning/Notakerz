@@ -7,6 +7,7 @@ import NoteThumbnail from "../../components/note-thumbnail/NoteThumbnail";
 import NoteThumbnailModal from "../../components/note-thumbnail/note-thumbnail-modal/NoteThumbnailModal";
 import PageHeader from "../../components/page-header/PageHeader";
 import MyGrid from "../../components/my-grid/MyGrid";
+import Loader from "../../components/loader/Loader";
 import { courseToTitle } from "../../utils/utils";
 
 import "./notePage.css";
@@ -76,11 +77,7 @@ class NotePage extends React.Component {
     // check if files are loaded (should all load at the same time anyway so it doesn't matter)
     if (!this.state.loaded) {
       // render spinner if not
-      return (
-        <div className="note-page-container">
-          <CircularProgress className="loader" size={75} />
-        </div>
-      );
+      return <Loader />;
     } else {
       return (
         <div className="note-page-container">

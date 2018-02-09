@@ -1,6 +1,9 @@
 import React from "react";
-import PageHeader from "../../components/page-header/PageHeader";
 import { LeadPencil } from "mdi-material-ui";
+import PageHeader from "../../components/page-header/PageHeader";
+import Loader from "../../components/loader/Loader";
+
+import { courseToTitle } from "../../utils/utils";
 import axios from "axios";
 
 import "./coursePage.css";
@@ -9,33 +12,44 @@ class CoursePage extends React.Component {
   constructor(props) {
     super();
     this.state = {
+      loaded: false,
       course: {}
     };
   }
 
   componentWillMount = () => {
-    console.log("GET courses/id");
+    console.log("GET " + this.props.location.pathname);
     axios
       .get(this.props.location.pathname)
       .then(res => {
-        this.setState({
-          course: res.data.course
-        });
         console.log(res.data.course);
+        this.setState({
+          course: res.data.course,
+          loaded: true
+        });
       })
       .catch(e => console.log(e));
   };
 
   render() {
-    return (
-      <div className="course-page-container">
-        <PageHeader
-          title="University of Florida"
-          subTitle=""
-          icon={LeadPencil}
-        />
-      </div>
-    );
+    if (this.state.loaded) {
+      return (
+        <div className="course-page-container">
+          <PageHeader
+            title="University of Florida"
+            subTitle={courseToTitle(
+              this.state.course.code,
+              this.state.course.semester,
+              this.state.course.year,
+              this.state.course.professor
+            )}
+            icon={LeadPencil}
+          />
+        </div>
+      );
+    } else {
+      return <Loader />;
+    }
   }
 }
 

@@ -1,0 +1,8 @@
+@import "../../utils/variables";
+.loader-component {
+  width: 100%;
+  height: 100%;
+  .loader {
+    @include center-vertical-horizontal(75px, 75px);
+  }
+}
